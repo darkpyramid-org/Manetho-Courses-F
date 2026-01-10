@@ -6,9 +6,9 @@ import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 const navItems = [
+  { label: "Courses", href: "/courses" },
   { label: "Docs", href: "/docs" },
-  { label: "Components", href: "/components" },
-  { label: "Product", href: "/product" },
+  { label: "Pricing", href: "/pricing" },
 ];
 
 export function Navbar() {
