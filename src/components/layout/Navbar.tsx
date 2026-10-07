@@ -19,7 +19,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
   Sheet,
+  SheetClose,
   SheetContent,
+  SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
 import {
@@ -210,19 +212,26 @@ export function Navbar() {
                 )}
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-full max-w-sm rounded-none border-border bg-card p-0">
+            <SheetContent
+              side="right"
+              hideClose
+              aria-describedby={undefined}
+              className="w-full max-w-sm rounded-none border-border bg-card p-0"
+            >
+              <SheetTitle className="sr-only">Site menu</SheetTitle>
               <div className="flex h-full flex-col">
                 <div className="flex items-center justify-between border-b border-border p-4">
                   <Logo />
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="h-9 w-9 rounded-sm"
-                    aria-label="Close menu"
-                    onClick={() => setMobileOpen(false)}
-                  >
-                    <X className="h-5 w-5" aria-hidden="true" />
-                  </Button>
+                  <SheetClose asChild>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="h-9 w-9 rounded-sm"
+                      aria-label="Close menu"
+                    >
+                      <X className="h-5 w-5" aria-hidden="true" />
+                    </Button>
+                  </SheetClose>
                 </div>
 
                 <div className="border-b border-border p-4">
