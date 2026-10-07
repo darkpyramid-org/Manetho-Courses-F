@@ -56,7 +56,7 @@ const utilityNav = [
 
 function NavLinks({ onNavigate }: { onNavigate?: () => void }) {
   return (
-    <nav aria-label="Primary" className="hidden items-center gap-0.5 lg:flex">
+    <nav aria-label="Primary" className="hidden items-center gap-0.5 xl:flex">
       {primaryNav.map((item) => (
         <NavLink
           key={item.href}
@@ -188,22 +188,25 @@ export function Navbar() {
         <NavLinks />
 
         <div className="flex items-center gap-2">
-          <div className="hidden md:block md:w-56 lg:w-72">
+          <div className="hidden lg:block lg:w-52 xl:w-72">
             <SearchBox compact />
           </div>
           <ThemeToggle />
-          <div className="hidden sm:block">
+          <div className="hidden xl:block">
             <UserMenu />
           </div>
 
           <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
             <SheetTrigger asChild>
               <Button
-                variant="ghost"
+                variant="outline"
                 size="icon"
-                className="h-9 w-9 rounded-sm lg:hidden"
-                aria-label="Open menu"
+                className="size-10 rounded-sm border-border bg-card/80 xl:hidden"
+                aria-label={mobileOpen ? "Close navigation menu" : "Open navigation menu"}
+                aria-controls="mobile-navigation"
                 aria-expanded={mobileOpen}
+                title={mobileOpen ? "Close navigation menu" : "Open navigation menu"}
+                data-testid="mobile-menu-toggle"
               >
                 {mobileOpen ? (
                   <X className="h-5 w-5" aria-hidden="true" />
@@ -213,6 +216,7 @@ export function Navbar() {
               </Button>
             </SheetTrigger>
             <SheetContent
+              id="mobile-navigation"
               side="right"
               hideClose
               aria-describedby={undefined}
