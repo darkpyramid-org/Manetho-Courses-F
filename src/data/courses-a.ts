@@ -5,6 +5,7 @@ import {
   reading,
   video,
   quiz,
+  exercise,
   timeline,
 } from "@/data/authoring";
 
@@ -575,7 +576,7 @@ const middleKingdom = defineCourse({
           "Literature of the Middle Kingdom",
           15,
           "The Tale of Sinuhe and the golden age of Egyptian letters.",
-          "The Middle Kingdom is the great age of Egyptian literature. The Tale of Sinuhe — often called the masterpiece of Egyptian literature — tells of a court official who flees Egypt after the death of Amenemhat I, lives abroad, and returns home in triumph. Its narrative art, its rhetoric, and its psychological portrait of a man in exile are remarkable.\n\nThe wisdom literature — "The ship of the mind" is how one text describes the educated mind — also includes the Instructions of Amenemhat, which teach how to live and rule; the Eloquent Peasant, a story of justice and rhetoric; and the Dialogue of a Man with His Ba, a meditation on death and life that reads like philosophy.\n\nMiddle Kingdom literature was so admired that it was copied for centuries afterward — much as classical authors were copied in later cultures. Its survival is also a warning: we have these texts because scribes copied them, and what they chose to copy is what we read.",
+          "The Middle Kingdom is the great age of Egyptian literature. The Tale of Sinuhe — often called the masterpiece of Egyptian literature — tells of a court official who flees Egypt after the death of Amenemhat I, lives abroad, and returns home in triumph. Its narrative art, its rhetoric, and its psychological portrait of a man in exile are remarkable.\n\nThe wisdom literature — \"The ship of the mind\" is how one text describes the educated mind — also includes the Instructions of Amenemhat, which teach how to live and rule; the Eloquent Peasant, a story of justice and rhetoric; and the Dialogue of a Man with His Ba, a meditation on death and life that reads like philosophy.\n\nMiddle Kingdom literature was so admired that it was copied for centuries afterward — much as classical authors were copied in later cultures. Its survival is also a warning: we have these texts because scribes copied them, and what they chose to copy is what we read.",
         ),
         reading(
           "middle-egyptian-the-language",
@@ -682,7 +683,7 @@ const newKingdom = defineCourse({
           "The Battle of Kadesh",
           15,
           "The most famous battle of the ancient Near East — and its two versions.",
-          "The Battle of Kadesh (c. 1274 BCE) was fought between Ramesses II of Egypt and Muwatalli II of the Hittites, in Syria. It is the most famous battle of the ancient Near East — and a masterclass in reading two versions of the same event.\n\nThe Egyptian version — the 'Poem' and the 'Bulletin', inscribed at Karnak, Abu Simbel, and the Ramesseum — presents Ramesses as the lone hero, charging into the Hittite chariot corps and winning a great victory. The Hittite version, from the archives of Hattusa (modern Boğazkale), tells a different story: the Hittites ambushed the divided Egyptian army and forced it to withdraw.\n\nThe honest conclusion is that "both sides won": the battle was probably indecisive, and its aftermath — the Egyptian-Hittite peace treaty of c. 1259 BCE, one of the earliest surviving treaties — suggests a negotiated stalemate. The treaty's text (in both Egyptian and Akkadian versions) is a monument to diplomacy, not war.",
+          "The Battle of Kadesh (c. 1274 BCE) was fought between Ramesses II of Egypt and Muwatalli II of the Hittites, in Syria. It is the most famous battle of the ancient Near East — and a masterclass in reading two versions of the same event.\n\nThe Egyptian version — the 'Poem' and the 'Bulletin', inscribed at Karnak, Abu Simbel, and the Ramesseum — presents Ramesses as the lone hero, charging into the Hittite chariot corps and winning a great victory. The Hittite version, from the archives of Hattusa (modern Boğazkale), tells a different story: the Hittites ambushed the divided Egyptian army and forced it to withdraw.\n\nThe honest conclusion is that \"both sides won\": the battle was probably indecisive, and its aftermath — the Egyptian-Hittite peace treaty of c. 1259 BCE, one of the earliest surviving treaties — suggests a negotiated stalemate. The treaty's text (in both Egyptian and Akkadian versions) is a monument to diplomacy, not war.",
         ),
         reading(
           "the-great-hypostyle-hall",

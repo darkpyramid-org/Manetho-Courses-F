@@ -1665,7 +1665,7 @@ export function getQuizForCourse(courseId: string): Quiz | undefined {
 }
 
 export function getQuizForLesson(
-  courseId: string,
+  _courseId: string,
   lesson: { quizId?: string },
 ): Quiz | undefined {
   if (!lesson.quizId) return undefined;
