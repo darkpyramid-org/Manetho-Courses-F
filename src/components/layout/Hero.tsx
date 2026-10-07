@@ -5,6 +5,17 @@ import { Button } from "@/components/ui/button";
 export function Hero() {
   return (
     <section className="relative min-h-screen overflow-hidden pt-32 pb-20">
+      <div className="pointer-events-none absolute inset-0">
+        <img
+          src="/images/manetho-hero.png"
+          alt=""
+          aria-hidden="true"
+          className="h-full w-full object-cover object-center opacity-35"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/75 to-background" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent" />
+      </div>
+
       {/* Background Effects */}
       <div className="pointer-events-none absolute inset-0">
         {/* Gradient glow */}
