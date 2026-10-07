@@ -34,7 +34,7 @@ const BookmarkContext = createContext<BookmarkContextValue | null>(null);
 
 export function BookmarkProvider({ children }: { children: ReactNode }) {
   const [saved, setSaved] = useState<string[]>(() =>
-    storageGet<string[]>(BOOKMARKS_KEY, []),
+    [...new Set(storageGet<string[]>(BOOKMARKS_KEY, []))],
   );
 
   useEffect(() => {
@@ -46,18 +46,20 @@ export function BookmarkProvider({ children }: { children: ReactNode }) {
     [saved],
   );
 
-  const toggle = useCallback((courseId: string): boolean => {
-    let nowSaved = false;
-    setSaved((prev) => {
-      if (prev.includes(courseId)) {
-        nowSaved = false;
-        return prev.filter((id) => id !== courseId);
-      }
-      nowSaved = true;
-      return [...prev, courseId];
-    });
-    return nowSaved;
-  }, []);
+  const toggle = useCallback(
+    (courseId: string): boolean => {
+      const nowSaved = !saved.includes(courseId);
+      setSaved((prev) =>
+        nowSaved
+          ? prev.includes(courseId)
+            ? prev
+            : [...prev, courseId]
+          : prev.filter((id) => id !== courseId),
+      );
+      return nowSaved;
+    },
+    [saved],
+  );
 
   const save = useCallback((courseId: string) => {
     setSaved((prev) =>

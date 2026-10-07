@@ -38,7 +38,13 @@ const PROGRESS_KEY = "progress:v1";
 const CERTIFICATES_KEY = "certificates:v1";
 
 function loadProgress(): Record<string, CourseProgress> {
-  return storageGet<Record<string, CourseProgress>>(PROGRESS_KEY, {});
+  const stored = storageGet<Record<string, CourseProgress>>(PROGRESS_KEY, {});
+  return Object.fromEntries(
+    Object.entries(stored).map(([courseId, progress]) => [
+      courseId,
+      { ...progress, completedLessons: [...new Set(progress.completedLessons)] },
+    ]),
+  );
 }
 
 function saveProgress(map: Record<string, CourseProgress>) {
@@ -103,6 +109,10 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
         const existing = prev[courseId];
         const course = courseService.getById(courseId);
         if (!course) return prev;
+        const lessonExists = course.modules.some((module) =>
+          module.lessons.some((lesson) => lesson.id === lessonId),
+        );
+        if (!lessonExists) return prev;
 
         const completed = existing
           ? [...existing.completedLessons]
