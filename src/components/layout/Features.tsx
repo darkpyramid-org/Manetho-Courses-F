@@ -3,9 +3,9 @@ import { Code2, Layers, Zap, Users, Shield, Rocket } from "lucide-react";
 const features = [
   {
     icon: Code2,
-    title: "Interactive Coding",
+    title: "Explore Every Era",
     description:
-      "Write, run, and test code directly in your browser with instant feedback.",
+      "Move from the earliest dynasties to the Ptolemaic period with clear, structured lessons.",
   },
   {
     icon: Layers,
@@ -15,27 +15,27 @@ const features = [
   },
   {
     icon: Zap,
-    title: "Lightning Fast",
+    title: "Learn in Context",
     description:
-      "Optimized for speed with instant page loads and smooth interactions.",
+      "Connect rulers, beliefs, places, and daily life to see how ancient Egypt fits together.",
   },
   {
     icon: Users,
-    title: "Community Driven",
+    title: "Study the Sources",
     description:
-      "Learn alongside peers, share projects, and get feedback from mentors.",
+      "Build your understanding with guided reading, visual references, and trusted historical context.",
   },
   {
     icon: Shield,
-    title: "Enterprise Ready",
+    title: "Track Your Progress",
     description:
-      "SSO, analytics, and team management for organizations of any size.",
+      "Keep your learning organized with bookmarks, progress tracking, and completed-course milestones.",
   },
   {
     icon: Rocket,
-    title: "Ship Real Projects",
+    title: "Keep Discovering",
     description:
-      "Build portfolio-worthy projects that demonstrate real-world skills.",
+      "Save fascinating courses and return to the topics you want to explore more deeply.",
   },
 ];
 
@@ -53,8 +53,7 @@ export function Features() {
             <span className="text-gradient">level up</span>
           </h2>
           <p className="text-lg text-muted-foreground">
-            A complete platform built for modern learners, with tools that
-            actually help you grow.
+Everything in Manetho is designed to help you learn consistently and build confidence through practice.
           </p>
         </div>
 

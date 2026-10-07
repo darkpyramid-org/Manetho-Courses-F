@@ -66,7 +66,7 @@ const releases: Release[] = [
   {
     version: "2.0.0",
     date: "September 15, 2024",
-    title: "LearnFlow 2.0",
+    title: "Manetho 2.0",
     changes: [
       { type: "feature", description: "Complete platform redesign with dark theme" },
       { type: "feature", description: "New interactive code editor" },
@@ -112,7 +112,7 @@ export default function Changelog() {
               <span className="text-gradient">Changelog</span>
             </h1>
             <p className="text-lg text-muted-foreground">
-              New updates and improvements to LearnFlow.
+              New updates and improvements to Manetho.
             </p>
           </div>
 

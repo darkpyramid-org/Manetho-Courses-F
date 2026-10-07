@@ -20,7 +20,7 @@ const contactMethods = [
     icon: Mail,
     title: "Email Us",
     description: "We'll respond within 24 hours",
-    value: "hello@learnflow.dev",
+    value: "hello@manetho.org",
   },
   {
     icon: MessageSquare,

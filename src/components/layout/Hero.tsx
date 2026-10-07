@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { ArrowRight, Play, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -27,7 +28,7 @@ export function Hero() {
           <div className="mb-8 inline-flex animate-fade-in items-center gap-2 rounded-full border border-border bg-card/50 px-4 py-2 backdrop-blur-sm">
             <Sparkles className="h-4 w-4 text-primary" />
             <span className="text-sm font-medium text-muted-foreground">
-              Introducing LearnFlow 2.0
+              Introducing Manetho 2.0
             </span>
             <ArrowRight className="h-4 w-4 text-muted-foreground" />
           </div>
@@ -37,9 +38,9 @@ export function Hero() {
             className="mb-6 text-4xl font-bold tracking-tight text-foreground opacity-0 animate-fade-in sm:text-5xl md:text-6xl lg:text-7xl"
             style={{ animationDelay: "100ms" }}
           >
-            Learn anything.
+            Explore ancient Egypt.
             <br />
-            <span className="text-gradient">Master everything.</span>
+            <span className="text-gradient">Understand the past.</span>
           </h1>
 
           {/* Subheadline */}
@@ -47,9 +48,7 @@ export function Hero() {
             className="mx-auto mb-10 max-w-2xl text-lg text-muted-foreground opacity-0 animate-fade-in sm:text-xl"
             style={{ animationDelay: "200ms" }}
           >
-            The modern learning platform designed for developers and creators.
-            Interactive courses, real-world projects, and a community that
-            pushes you forward.
+            A focused learning space for mastering practical skills through clear lessons, guided practice, and real projects.
           </p>
 
           {/* CTA Buttons */}
@@ -57,17 +56,22 @@ export function Hero() {
             className="flex flex-col items-center justify-center gap-4 opacity-0 animate-fade-in sm:flex-row"
             style={{ animationDelay: "300ms" }}
           >
-            <Button size="lg" className="group min-w-[180px] glow-primary">
-              Start Learning
-              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+            <Button asChild size="lg" className="group min-w-[180px] glow-primary">
+              <Link to="/courses">
+                Start Learning
+                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </Link>
             </Button>
             <Button
+              asChild
               variant="outline"
               size="lg"
               className="min-w-[180px] border-border bg-transparent hover:bg-secondary"
             >
-              <Play className="mr-2 h-4 w-4" />
-              Watch Demo
+              <Link to="/courses">
+                <Play className="mr-2 h-4 w-4" />
+                Explore Courses
+              </Link>
             </Button>
           </div>
 
