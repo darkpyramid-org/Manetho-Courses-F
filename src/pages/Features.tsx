@@ -201,7 +201,7 @@ export default function Features() {
               Ready to get started?
             </h2>
             <p className="mb-8 text-muted-foreground">
-              Join thousands of developers learning with LearnFlow today.
+              Join thousands of developers learning with Manetho today.
             </p>
             <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
               <Link to="/courses">

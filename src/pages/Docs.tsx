@@ -27,7 +27,7 @@ const sections = [
   {
     title: "Core Concepts",
     icon: BookOpen,
-    description: "Learn the fundamental concepts of LearnFlow",
+    description: "Learn the fundamental concepts of Manetho",
     links: [
       { label: "Courses", href: "/docs/courses" },
       { label: "Learning Paths", href: "/docs/paths" },
@@ -88,7 +88,7 @@ export default function Docs() {
               <span className="text-gradient">Documentation</span>
             </h1>
             <p className="mb-8 text-lg text-muted-foreground">
-              Everything you need to get started with LearnFlow. Guides,
+              Everything you need to get started with Manetho. Guides,
               references, and examples.
             </p>
 

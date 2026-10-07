@@ -67,7 +67,7 @@ export default function About() {
             </h1>
             <p className="text-lg text-muted-foreground">
               We're on a mission to make high-quality education accessible to
-              everyone. LearnFlow combines expert instruction, hands-on
+              everyone. Manetho combines expert instruction, hands-on
               projects, and community support to help you build real skills.
             </p>
           </div>
@@ -96,7 +96,7 @@ export default function About() {
             </h2>
             <div className="space-y-4 text-muted-foreground">
               <p>
-                LearnFlow started in 2021 when two engineers noticed a gap in
+                Manetho started in 2021 when two engineers noticed a gap in
                 online education. Most platforms focused on passive
                 video-watching, but real learning happens when you build things.
               </p>
@@ -107,7 +107,7 @@ export default function About() {
                 just teachers.
               </p>
               <p>
-                Today, LearnFlow serves over 50,000 learners worldwide, with
+                Today, Manetho serves over 50,000 learners worldwide, with
                 students from startups and Fortune 500 companies alike. We're
                 just getting started.
               </p>

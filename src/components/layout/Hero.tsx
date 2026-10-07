@@ -27,7 +27,7 @@ export function Hero() {
           <div className="mb-8 inline-flex animate-fade-in items-center gap-2 rounded-full border border-border bg-card/50 px-4 py-2 backdrop-blur-sm">
             <Sparkles className="h-4 w-4 text-primary" />
             <span className="text-sm font-medium text-muted-foreground">
-              Introducing LearnFlow 2.0
+              Introducing Manetho 2.0
             </span>
             <ArrowRight className="h-4 w-4 text-muted-foreground" />
           </div>

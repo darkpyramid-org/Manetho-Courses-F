@@ -82,7 +82,7 @@ export default function Careers() {
           {/* Benefits */}
           <div className="mx-auto mb-20 max-w-4xl">
             <h2 className="mb-8 text-center text-2xl font-bold text-foreground">
-              Why work at LearnFlow?
+              Why work at Manetho?
             </h2>
             <div className="grid gap-6 sm:grid-cols-3">
               {benefits.map((benefit) => {

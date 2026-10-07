@@ -8,7 +8,7 @@ import { Check, Sparkles } from "lucide-react";
 const plans = [
   {
     name: "Free",
-    description: "Perfect for trying out LearnFlow",
+    description: "Perfect for trying out Manetho",
     monthlyPrice: 0,
     yearlyPrice: 0,
     features: [

@@ -72,7 +72,7 @@ export default function Product() {
               <span className="text-gradient">learning by doing</span>
             </h1>
             <p className="mb-8 text-lg text-muted-foreground">
-              LearnFlow combines interactive courses, real projects, and
+              Manetho combines interactive courses, real projects, and
               community support to help you build the skills that matter.
             </p>
             <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
@@ -121,7 +121,7 @@ export default function Product() {
           {/* How it works */}
           <div className="mx-auto mb-20 max-w-4xl">
             <h2 className="mb-12 text-center text-2xl font-bold text-foreground sm:text-3xl">
-              How LearnFlow works
+              How Manetho works
             </h2>
             <div className="relative">
               {/* Connection line */}
@@ -179,7 +179,7 @@ export default function Product() {
                 Integrates with your workflow
               </h2>
               <p className="text-muted-foreground">
-                Connect LearnFlow with the tools you already use.
+                Connect Manetho with the tools you already use.
               </p>
             </div>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -206,7 +206,7 @@ export default function Product() {
               Ready to start learning?
             </h2>
             <p className="mb-8 text-muted-foreground">
-              Join 50,000+ learners building real skills with LearnFlow.
+              Join 50,000+ learners building real skills with Manetho.
             </p>
             <Link to="/courses">
               <Button size="lg" className="glow-primary">

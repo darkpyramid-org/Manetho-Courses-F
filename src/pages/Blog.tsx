@@ -99,7 +99,7 @@ export default function Blog() {
               <span className="text-gradient">Blog</span>
             </h1>
             <p className="text-lg text-muted-foreground">
-              Insights, tutorials, and updates from the LearnFlow team.
+              Insights, tutorials, and updates from the Manetho team.
             </p>
           </div>
 
