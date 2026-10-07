@@ -148,6 +148,25 @@
 }
 
 @layer components {
+  .text-gradient {
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+  .bg-gradient-glow {
+    background: radial-gradient(circle, hsl(var(--primary) / 0.16), transparent 68%);
+  }
+
+  .bg-gradient-radial {
+    background: radial-gradient(circle, var(--tw-gradient-from), var(--tw-gradient-to, transparent 70%));
+  }
+
+  .transition-smooth {
+    transition: color 180ms ease, background-color 180ms ease, border-color 180ms ease, transform 180ms ease, opacity 180ms ease;
+  }
+
   /* Editorial display heading */
   .display {
     @apply font-serif font-medium tracking-tight text-foreground;
@@ -165,6 +184,15 @@
 }
 
 @layer utilities {
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(0.5rem); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 600ms ease-out forwards;
+  }
+
   .reading-width {
     max-width: 44rem;
   }

@@ -56,7 +56,7 @@ const utilityNav = [
 
 function NavLinks({ onNavigate }: { onNavigate?: () => void }) {
   return (
-    <nav aria-label="Primary" className="hidden items-center gap-0.5 lg:flex">
+    <nav aria-label="Primary" className="hidden items-center gap-0.5 xl:flex">
       {primaryNav.map((item) => (
         <NavLink
           key={item.href}
@@ -188,11 +188,11 @@ export function Navbar() {
         <NavLinks />
 
         <div className="flex items-center gap-2">
-          <div className="hidden md:block md:w-56 lg:w-72">
+          <div className="hidden lg:block lg:w-52 xl:w-72">
             <SearchBox compact />
           </div>
           <ThemeToggle />
-          <div className="hidden sm:block">
+          <div className="hidden xl:block">
             <UserMenu />
           </div>
 
@@ -201,7 +201,7 @@ export function Navbar() {
               <Button
                 variant="ghost"
                 size="icon"
-                className="h-9 w-9 rounded-sm lg:hidden"
+                className="h-9 w-9 rounded-sm xl:hidden"
                 aria-label="Open menu"
                 aria-expanded={mobileOpen}
               >
