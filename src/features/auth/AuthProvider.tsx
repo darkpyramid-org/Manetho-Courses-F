@@ -37,11 +37,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<AuthUser | null>(null);
 
   const signIn = useCallback((name: string, email: string) => {
-    setUser({ id: DEMO_USER_ID, name: name.trim(), email: email.trim() });
+    const trimmedName = name.trim();
+    const trimmedEmail = email.trim();
+    if (!trimmedName || !trimmedEmail) return;
+    setUser({ id: DEMO_USER_ID, name: trimmedName, email: trimmedEmail });
   }, []);
 
   const register = useCallback((name: string, email: string) => {
-    setUser({ id: DEMO_USER_ID, name: name.trim(), email: email.trim() });
+    const trimmedName = name.trim();
+    const trimmedEmail = email.trim();
+    if (!trimmedName || !trimmedEmail) return;
+    setUser({ id: DEMO_USER_ID, name: trimmedName, email: trimmedEmail });
   }, []);
 
   const signOut = useCallback(() => setUser(null), []);
