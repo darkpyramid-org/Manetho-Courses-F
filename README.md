@@ -1,73 +1,121 @@
-# Welcome to your Lovable project
+# Manetho Courses
 
-## Project info
+Modern online education platform built with React, TypeScript, and Tailwind CSS.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## 🚀 Quick Start
 
-## How can I edit this code?
+### Prerequisites
+- Node.js v16+
+- npm or Bun
 
-There are several ways of editing your application.
-
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+### Installation & Run
+```bash
+git clone https://github.com/darkpyramid-org/Manetho-Courses-F
+cd Manetho-Courses-F
+npm install
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+Open http://localhost:5173
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## 📋 Focus Points
 
-**Use GitHub Codespaces**
+### For Developers
+- **Setup**: See [`docs/SETUP.md`](docs/SETUP.md)
+- **Architecture**: See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md)
+- **Components**: See [`docs/COMPONENTS.md`](docs/COMPONENTS.md)
+- **Data**: See [`docs/DATA.md`](docs/DATA.md)
+- **Styling**: See [`docs/STYLING.md`](docs/STYLING.md)
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+### For Contributors
+- **Contributing**: See [`CONTRIBUTING.md`](CONTRIBUTING.md)
+- **Code of Conduct**: See [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md)
 
-## What technologies are used for this project?
+### For Users
+- **Features**: [`docs/FEATURES.md`](docs/FEATURES.md)
+- **FAQ**: [`docs/FAQ.md`](docs/FAQ.md)
 
-This project is built with:
+## 🛠 Tech Stack
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+| Layer | Technology |
+|-------|-----------|
+| **Framework** | React 18.3 + TypeScript 5.8 |
+| **Build Tool** | Vite 5.4 |
+| **Styling** | Tailwind CSS 3.4 + PostCSS |
+| **Components** | shadcn/ui + Radix UI |
+| **Routing** | React Router DOM 6.30 |
+| **Icons** | Lucide React |
+| **Linting** | ESLint 9.32 |
 
-## How can I deploy this project?
+## 📁 Project Structure
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+```
+src/
+├── components/     # React components (UI, Layout, Custom)
+├── pages/          # Page components (routing)
+├── data/           # Static course data
+├── hooks/          # Custom React hooks
+├── lib/            # Utility functions
+├── types/          # TypeScript definitions
+├── App.tsx         # Root component
+├── main.tsx        # Entry point
+└── index.css       # Global styles
 
-## Can I connect a custom domain to my Lovable project?
+docs/              # Documentation
+.github/           # GitHub workflows
+```
 
-Yes, you can!
+## 📚 Available Scripts
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+```bash
+npm run dev         # Start development server
+npm run build       # Build for production
+npm run preview     # Preview production build
+npm run lint        # Run ESLint
+npm run typecheck   # Check TypeScript
+npm run test        # Run smoke tests
+```
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+## 🎯 Key Features
+
+- ✅ Responsive design (mobile-first)
+- ✅ Type-safe with TypeScript
+- ✅ Accessible components (WCAG compliant)
+- ✅ Fast development with Vite HMR
+- ✅ Structured course data
+- ✅ Interactive UI components
+
+## 📖 Pages
+
+- **Home** - Landing page
+- **Courses** - Course listings
+- **Product** - Product information
+- **Features** - Platform features
+- **Pricing** - Pricing tiers
+- **Blog** - Blog posts
+- **Docs** - Documentation
+- **About** - About page
+- **Contact** - Contact form
+- **Careers** - Career opportunities
+- **Changelog** - Version history
+
+## 🤝 Contributing
+
+We welcome contributions! Please see [`CONTRIBUTING.md`](CONTRIBUTING.md) for guidelines.
+
+## 📄 License
+
+See [`LICENSE`](LICENSE) file for details.
+
+## 🔗 Links
+
+- **GitHub**: https://github.com/darkpyramid-org/Manetho-Courses-F
+- **Issues**: https://github.com/darkpyramid-org/Manetho-Courses-F/issues
+- **Discussions**: https://github.com/darkpyramid-org/Manetho-Courses-F/discussions
+
+## ❓ Need Help?
+
+- 📖 Read the [docs](docs/)
+- 🤔 Check [FAQ](docs/FAQ.md)
+- 💬 Open a [discussion](https://github.com/darkpyramid-org/Manetho-Courses-F/discussions)
+- 🐛 Report a [bug](https://github.com/darkpyramid-org/Manetho-Courses-F/issues)

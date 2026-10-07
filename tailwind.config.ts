@@ -2,38 +2,60 @@ import type { Config } from "tailwindcss";
 
 export default {
   darkMode: ["class"],
-  content: [
-    "./pages/**/*.{ts,tsx}",
-    "./components/**/*.{ts,tsx}",
-    "./app/**/*.{ts,tsx}",
-    "./src/**/*.{ts,tsx}",
-  ],
+  content: ["./src/**/*.{ts,tsx}"],
   prefix: "",
   theme: {
     container: {
       center: true,
-      padding: "2rem",
+      padding: "1.5rem",
       screens: {
         "2xl": "1400px",
       },
     },
     extend: {
       colors: {
-        // Fern palette
-        fern: {
-          50: "hsl(var(--fern-50))",
-          100: "hsl(var(--fern-100))",
-          200: "hsl(var(--fern-200))",
-          300: "hsl(var(--fern-300))",
-          400: "hsl(var(--fern-400))",
-          500: "hsl(var(--fern-500))",
-          600: "hsl(var(--fern-600))",
-          700: "hsl(var(--fern-700))",
-          800: "hsl(var(--fern-800))",
-          900: "hsl(var(--fern-900))",
-          950: "hsl(var(--fern-950))",
+        // Manetho palette (design tokens)
+        obsidian: "#171512",
+        papyrus: "#F4EFE5",
+        sandstone: "#D7C19A",
+        gold: {
+          50: "#F7F0DF",
+          100: "#EFE3C2",
+          200: "#E3CD9C",
+          300: "#D5B471",
+          400: "#C69E4E",
+          500: "#B08A3C",
+          600: "#96722E",
+          700: "#7A5827",
+          800: "#5E421F",
+          900: "#422E17",
         },
-        // Semantic colors
+        nile: {
+          50: "#EEF5F6",
+          100: "#D5E6E9",
+          200: "#AECFD6",
+          300: "#7FB0BC",
+          400: "#4E8898",
+          500: "#245B67",
+          600: "#1D4852",
+          700: "#16353D",
+          800: "#0F2329",
+          900: "#081114",
+        },
+        terracotta: {
+          50: "#F7EFE9",
+          100: "#EDD9CC",
+          200: "#DDB7A0",
+          300: "#C98F6D",
+          400: "#B46F47",
+          500: "#9A5A3A",
+          600: "#7F482E",
+          700: "#633724",
+          800: "#472719",
+          900: "#2C170F",
+        },
+        ink: "#28231E",
+        // Semantic tokens
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -67,21 +89,6 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // Glass effect colors
-        glass: {
-          DEFAULT: "hsl(var(--glass-bg))",
-          border: "hsl(var(--glass-border))",
-        },
-        sidebar: {
-          DEFAULT: "hsl(var(--sidebar-background))",
-          foreground: "hsl(var(--sidebar-foreground))",
-          primary: "hsl(var(--sidebar-primary))",
-          "primary-foreground": "hsl(var(--sidebar-primary-foreground))",
-          accent: "hsl(var(--sidebar-accent))",
-          "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
-          border: "hsl(var(--sidebar-border))",
-          ring: "hsl(var(--sidebar-ring))",
-        },
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -98,6 +105,12 @@ export default {
           "Roboto",
           "sans-serif",
         ],
+        serif: [
+          "Cormorant Garamond",
+          "Libre Baskerville",
+          "Georgia",
+          "serif",
+        ],
       },
       keyframes: {
         "accordion-down": {
@@ -108,39 +121,12 @@ export default {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-        "fade-in": {
-          from: { opacity: "0", transform: "translateY(10px)" },
-          to: { opacity: "1", transform: "translateY(0)" },
-        },
-        "fade-in-up": {
-          from: { opacity: "0", transform: "translateY(20px)" },
-          to: { opacity: "1", transform: "translateY(0)" },
-        },
-        "glow-pulse": {
-          "0%, 100%": { opacity: "0.6" },
-          "50%": { opacity: "1" },
-        },
-        float: {
-          "0%, 100%": { transform: "translateY(0)" },
-          "50%": { transform: "translateY(-10px)" },
-        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "fade-in": "fade-in 0.5s ease-out forwards",
-        "fade-in-up": "fade-in-up 0.6s ease-out forwards",
-        "glow-pulse": "glow-pulse 2s ease-in-out infinite",
-        float: "float 6s ease-in-out infinite",
-      },
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-fern":
-          "linear-gradient(135deg, hsl(var(--fern-900)) 0%, hsl(var(--fern-950)) 100%)",
-        "gradient-glow":
-          "radial-gradient(ellipse at center, hsl(var(--fern-500) / 0.15) 0%, transparent 70%)",
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
 } satisfies Config;

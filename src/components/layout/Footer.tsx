@@ -1,125 +1,82 @@
 import { Link } from "react-router-dom";
-import { BookOpen, Github, Twitter } from "lucide-react";
+import { Logo } from "@/components/layout/Logo";
 
-const footerLinks = {
-  product: [
-    { label: "Features", href: "/features" },
-    { label: "Pricing", href: "/pricing" },
-    { label: "Changelog", href: "/changelog" },
-  ],
-  resources: [
-    { label: "Documentation", href: "/docs" },
-    { label: "Tutorials", href: "/tutorials" },
-    { label: "Blog", href: "/blog" },
-  ],
-  company: [
-    { label: "About", href: "/about" },
-    { label: "Careers", href: "/careers" },
-    { label: "Contact", href: "/contact" },
-  ],
-};
+const footerColumns = [
+  {
+    title: "Learn",
+    links: [
+      { label: "Courses", href: "/courses" },
+      { label: "Learning Paths", href: "/learning-paths" },
+      { label: "Topics", href: "/topics" },
+      { label: "Instructors", href: "/instructors" },
+      { label: "Resources", href: "/resources" },
+    ],
+  },
+  {
+    title: "My Manetho",
+    links: [
+      { label: "My Learning", href: "/my-learning" },
+      { label: "Saved Courses", href: "/saved" },
+      { label: "Certificates", href: "/my-learning/certificates" },
+      { label: "Profile", href: "/profile" },
+    ],
+  },
+  {
+    title: "Platform",
+    links: [
+      { label: "About Manetho", href: "/about" },
+      { label: "Search", href: "/search" },
+      { label: "Sign in", href: "/login" },
+      { label: "Register", href: "/register" },
+    ],
+  },
+];
 
 export function Footer() {
   return (
-    <footer className="border-t border-border bg-card/30">
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-5">
-          {/* Brand */}
-          <div className="lg:col-span-2">
-            <Link to="/" className="inline-flex items-center gap-2">
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary">
-                <BookOpen className="h-5 w-5 text-primary-foreground" />
-              </div>
-              <span className="text-lg font-semibold text-foreground">
-                LearnFlow
-              </span>
-            </Link>
-            <p className="mt-4 max-w-xs text-sm text-muted-foreground">
-              The modern learning platform for developers. Build real skills,
-              ship real projects.
+    <footer className="border-t border-border bg-secondary/40">
+      <div className="container py-14">
+        <div className="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
+          <div>
+            <Logo />
+            <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
+              A digital learning platform dedicated to Ancient Egypt —
+              structured courses, historical context, and archaeological
+              evidence for one of history's greatest civilizations.
             </p>
-            <div className="mt-6 flex gap-4">
-              <a
-                href="https://github.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground transition-smooth hover:text-foreground"
-                aria-label="GitHub"
-              >
-                <Github className="h-5 w-5" />
-              </a>
-              <a
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground transition-smooth hover:text-foreground"
-                aria-label="Twitter"
-              >
-                <Twitter className="h-5 w-5" />
-              </a>
-            </div>
+            <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
+              Manetho is a demonstration platform. Course content is
+              seed content for study; instructor profiles are illustrative.
+              Progress is stored locally in your browser.
+            </p>
           </div>
 
-          {/* Links */}
-          <div>
-            <h4 className="mb-4 text-sm font-semibold text-foreground">
-              Product
-            </h4>
-            <ul className="space-y-3">
-              {footerLinks.product.map((link) => (
-                <li key={link.label}>
-                  <Link
-                    to={link.href}
-                    className="text-sm text-muted-foreground transition-smooth hover:text-foreground"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="mb-4 text-sm font-semibold text-foreground">
-              Resources
-            </h4>
-            <ul className="space-y-3">
-              {footerLinks.resources.map((link) => (
-                <li key={link.label}>
-                  <Link
-                    to={link.href}
-                    className="text-sm text-muted-foreground transition-smooth hover:text-foreground"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="mb-4 text-sm font-semibold text-foreground">
-              Company
-            </h4>
-            <ul className="space-y-3">
-              {footerLinks.company.map((link) => (
-                <li key={link.label}>
-                  <Link
-                    to={link.href}
-                    className="text-sm text-muted-foreground transition-smooth hover:text-foreground"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {footerColumns.map((column) => (
+            <nav key={column.title} aria-label={column.title}>
+              <h3 className="eyebrow mb-4">{column.title}</h3>
+              <ul className="space-y-2.5">
+                {column.links.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      to={link.href}
+                      className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          ))}
         </div>
 
-        {/* Bottom */}
-        <div className="mt-12 border-t border-border pt-8">
-          <p className="text-center text-sm text-muted-foreground">
-            © {new Date().getFullYear()} LearnFlow. All rights reserved.
+        <div className="mt-12 flex flex-col items-start justify-between gap-3 border-t border-border pt-6 sm:flex-row sm:items-center">
+          <p className="text-xs text-muted-foreground">
+            © {new Date().getFullYear()} Manetho. Learn Ancient Egypt.
+          </p>
+          <p className="text-xs text-muted-foreground">
+            Named for Manetho of Sebennytos, the Egyptian priest who first
+            divided pharaonic history into dynasties.
           </p>
         </div>
       </div>

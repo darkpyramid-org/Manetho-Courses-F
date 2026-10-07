@@ -1,0 +1,24 @@
+# Code Owners
+# This file defines who will be auto-requested as reviewers for PRs
+
+# Root configuration files
+* @darkpyramid-org/maintainers
+
+# Documentation
+/docs/ @darkpyramid-org/maintainers
+*.md @darkpyramid-org/maintainers
+
+# GitHub configuration
+.github/ @darkpyramid-org/maintainers
+
+# Source code
+/src/ @darkpyramid-org/developers
+
+# Components
+/src/components/ @darkpyramid-org/developers
+
+# Configuration
+vite.config.ts @darkpyramid-org/maintainers
+tailwind.config.ts @darkpyramid-org/maintainers
+tsconfig.json @darkpyramid-org/maintainers
+eslint.config.js @darkpyramid-org/maintainers

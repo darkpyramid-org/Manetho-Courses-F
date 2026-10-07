@@ -2,99 +2,77 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Fern Design System - Learning Platform */
+/*
+ * Manetho Design System
+ * British Museum education × modern editorial platform × premium online learning
+ *
+ * Light mode:  ivory / parchment / warm white / charcoal / muted gold
+ * Dark mode:   obsidian / charcoal / muted sandstone / restrained gold / nile blue
+ */
+
 @layer base {
   :root {
-    /* Fern Color Palette */
-    --fern-50: 132 53% 91%;
-    --fern-100: 134 45% 85%;
-    --fern-200: 136 40% 80%;
-    --fern-300: 140 36% 67%;
-    --fern-400: 144 32% 53%;
-    --fern-500: 147 48% 39%;
-    --fern-600: 150 52% 30%;
-    --fern-700: 152 52% 24%;
-    --fern-800: 154 50% 20%;
-    --fern-900: 155 47% 16%;
-    --fern-950: 154 54% 9%;
+    --background: 39 47% 93%; /* papyrus */
+    --foreground: 30 14% 14%; /* ink */
 
-    /* Semantic Tokens - Dark Theme */
-    --background: 154 54% 9%;
-    --foreground: 132 53% 91%;
+    --card: 40 44% 97%; /* warm white */
+    --card-foreground: 30 14% 14%;
 
-    --card: 155 47% 12%;
-    --card-foreground: 132 53% 91%;
+    --popover: 40 44% 97%;
+    --popover-foreground: 30 14% 14%;
 
-    --popover: 155 47% 12%;
-    --popover-foreground: 132 53% 91%;
+    --primary: 38 52% 38%; /* deep ancient gold */
+    --primary-foreground: 40 44% 97%;
 
-    --primary: 147 48% 39%;
-    --primary-foreground: 132 53% 91%;
+    --secondary: 39 32% 88%; /* sandstone wash */
+    --secondary-foreground: 30 14% 14%;
 
-    --secondary: 155 47% 16%;
-    --secondary-foreground: 136 40% 80%;
+    --muted: 39 28% 88%;
+    --muted-foreground: 30 10% 38%;
 
-    --muted: 154 50% 20%;
-    --muted-foreground: 136 40% 80%;
+    --accent: 192 48% 27%; /* egyptian blue */
+    --accent-foreground: 39 47% 93%;
 
-    --accent: 144 32% 53%;
-    --accent-foreground: 154 54% 9%;
+    --destructive: 14 60% 42%;
+    --destructive-foreground: 40 44% 97%;
 
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 100%;
+    --border: 39 30% 80%;
+    --input: 39 30% 80%;
+    --ring: 38 52% 38%;
 
-    --border: 154 50% 20%;
-    --input: 154 50% 20%;
-    --ring: 147 48% 39%;
-
-    --radius: 0.75rem;
-
-    /* Glass Effect Variables */
-    --glass-bg: 155 47% 12%;
-    --glass-border: 154 50% 25%;
-    
-    /* Shadows */
-    --shadow-sm: 0 1px 2px 0 hsl(154 54% 5% / 0.3);
-    --shadow-md: 0 4px 6px -1px hsl(154 54% 5% / 0.4), 0 2px 4px -2px hsl(154 54% 5% / 0.3);
-    --shadow-lg: 0 10px 15px -3px hsl(154 54% 5% / 0.5), 0 4px 6px -4px hsl(154 54% 5% / 0.4);
-    --shadow-glow: 0 0 20px hsl(147 48% 39% / 0.3);
-
-    /* Sidebar - inheriting from main theme */
-    --sidebar-background: 155 47% 12%;
-    --sidebar-foreground: 132 53% 91%;
-    --sidebar-primary: 147 48% 39%;
-    --sidebar-primary-foreground: 132 53% 91%;
-    --sidebar-accent: 155 47% 16%;
-    --sidebar-accent-foreground: 136 40% 80%;
-    --sidebar-border: 154 50% 20%;
-    --sidebar-ring: 147 48% 39%;
+    --radius: 0.5rem;
   }
 
   .dark {
-    /* Dark mode is default - same values */
-    --background: 154 54% 9%;
-    --foreground: 132 53% 91%;
-    --card: 155 47% 12%;
-    --card-foreground: 132 53% 91%;
-    --popover: 155 47% 12%;
-    --popover-foreground: 132 53% 91%;
-    --primary: 147 48% 39%;
-    --primary-foreground: 132 53% 91%;
-    --secondary: 155 47% 16%;
-    --secondary-foreground: 136 40% 80%;
-    --muted: 154 50% 20%;
-    --muted-foreground: 136 40% 80%;
-    --accent: 144 32% 53%;
-    --accent-foreground: 154 54% 9%;
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 100%;
-    --border: 154 50% 20%;
-    --input: 154 50% 20%;
-    --ring: 147 48% 39%;
-  }
-}
+    --background: 37 14% 8%; /* obsidian */
+    --foreground: 40 30% 88%; /* muted papyrus */
 
-@layer base {
+    --card: 37 16% 12%; /* charcoal */
+    --card-foreground: 40 30% 88%;
+
+    --popover: 37 16% 12%;
+    --popover-foreground: 40 30% 88%;
+
+    --primary: 40 48% 58%; /* restrained gold */
+    --primary-foreground: 37 14% 8%;
+
+    --secondary: 37 14% 17%;
+    --secondary-foreground: 40 30% 88%;
+
+    --muted: 37 12% 19%;
+    --muted-foreground: 39 16% 62%;
+
+    --accent: 192 38% 45%; /* lighter nile blue for dark surfaces */
+    --accent-foreground: 37 14% 8%;
+
+    --destructive: 14 55% 55%;
+    --destructive-foreground: 37 14% 8%;
+
+    --border: 37 14% 22%;
+    --input: 37 14% 22%;
+    --ring: 40 48% 58%;
+  }
+
   * {
     @apply border-border;
   }
@@ -107,49 +85,50 @@
     @apply bg-background text-foreground antialiased;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
+
+  ::selection {
+    @apply bg-gold-500/30 text-foreground;
+  }
+
+  :focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
 }
 
 @layer components {
-  /* Glassmorphism utility */
-  .glass {
-    @apply bg-card/80 backdrop-blur-md border border-glass-border;
+  /* Editorial display heading */
+  .display {
+    @apply font-serif font-medium tracking-tight text-foreground;
   }
 
-  .glass-strong {
-    @apply bg-card/90 backdrop-blur-lg border border-glass-border;
+  /* Small-caps section eyebrow */
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-[0.18em] text-primary;
   }
 
-  /* Glow effect */
-  .glow-primary {
-    box-shadow: var(--shadow-glow);
-  }
-
-  /* Text gradient */
-  .text-gradient {
-    @apply bg-gradient-to-r from-fern-300 via-fern-400 to-fern-300 bg-clip-text text-transparent;
+  /* Thin archaeological rule */
+  .rule {
+    @apply h-px w-full bg-border;
   }
 }
 
 @layer utilities {
-  /* Custom shadow utilities */
-  .shadow-fern-sm {
-    box-shadow: var(--shadow-sm);
-  }
-  
-  .shadow-fern-md {
-    box-shadow: var(--shadow-md);
-  }
-  
-  .shadow-fern-lg {
-    box-shadow: var(--shadow-lg);
-  }
-
-  /* Animation utilities */
-  .transition-smooth {
-    @apply transition-all duration-200 ease-out;
-  }
-
-  .transition-colors-smooth {
-    @apply transition-colors duration-150 ease-out;
+  .reading-width {
+    max-width: 44rem;
   }
 }
