@@ -1,6 +1,6 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { Users, Target, Heart, Globe } from "lucide-react";
+import { Target, Heart, Globe } from "lucide-react";
 
 const stats = [
   { value: "50K+", label: "Active Learners" },

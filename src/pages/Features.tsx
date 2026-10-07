@@ -6,7 +6,6 @@ import {
   ArrowRight,
   Code2,
   Layers,
-  Zap,
   Users,
   Shield,
   Rocket,

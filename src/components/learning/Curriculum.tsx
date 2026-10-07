@@ -47,6 +47,9 @@ export function lessonTypeIcon(type: LessonType, className = "h-4 w-4") {
 }
 
 export function lessonTypeLabel(type: LessonType): string {
+  switch (type) {
+    case "video":
+      return "Video";
     case "reading":
       return "Reading";
     case "quiz":
@@ -267,19 +270,18 @@ export function LessonNavigation({
   course,
   lesson,
   onPrevious,
-  onNext,
 }: {
   course: Course;
   lesson: Lesson;
   onPrevious: () => void;
-  onNext: () => void;
+  onNext?: () => void;
 }) {
   const { markLessonComplete, isLessonComplete, isComplete } =
     useCourseProgress(course);
   const neighbours = lessonNeighbours(course, lesson.slug);
   const done = isLessonComplete(lesson.id);
   const navigate = useNavigate();
-  const { courseSlug, lessonSlug } = useParams<{
+  const { courseSlug } = useParams<{
     courseSlug: string;
     lessonSlug: string;
   }>();
@@ -416,5 +418,3 @@ export function MobileCurriculumSheet({
     </Sheet>
   );
 }
-
-import { Sheet, SheetContent } from "@/components/ui/sheet";

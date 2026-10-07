@@ -10,7 +10,6 @@ import {
   Trophy,
   Laptop,
   MessageSquare,
-  BarChart3,
   Zap,
 } from "lucide-react";
 
@@ -154,7 +153,7 @@ export default function Product() {
                     description:
                       "Complete courses to earn verified certificates. Showcase your portfolio to employers.",
                   },
-                ].map((item, index) => (
+                ].map((item) => (
                   <div key={item.step} className="flex gap-6">
                     <div className="relative z-10 flex h-16 w-16 shrink-0 items-center justify-center rounded-full border border-primary bg-background text-xl font-bold text-primary">
                       {item.step}

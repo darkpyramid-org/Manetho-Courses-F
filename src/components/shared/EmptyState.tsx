@@ -10,12 +10,14 @@ export function EmptyState({
   actionLabel,
   actionHref,
   icon,
+  children,
 }: {
   title: string;
   description: string;
   actionLabel?: string;
   actionHref?: string;
   icon?: ReactNode;
+  children?: ReactNode;
 }) {
   return (
     <section
@@ -37,6 +39,7 @@ export function EmptyState({
           <Link to={actionHref}>{actionLabel}</Link>
         </Button>
       )}
+      {children}
     </section>
   );
 }
