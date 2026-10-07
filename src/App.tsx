@@ -3,6 +3,10 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { ThemeProvider } from "@/features/theme/ThemeProvider";
+import { AuthProvider } from "@/features/auth/AuthProvider";
+import { ProgressProvider } from "@/features/progress/ProgressProvider";
+import { BookmarkProvider } from "@/features/bookmarks/BookmarkProvider";
 import Index from "./pages/Index";
 import Courses from "./pages/Courses";
 import Pricing from "./pages/Pricing";
@@ -20,6 +24,10 @@ const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
+    <ThemeProvider>
+    <AuthProvider>
+    <ProgressProvider>
+    <BookmarkProvider>
     <TooltipProvider>
       <Toaster />
       <Sonner />
@@ -42,6 +50,10 @@ const App = () => (
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
+    </BookmarkProvider>
+    </ProgressProvider>
+    </AuthProvider>
+    </ThemeProvider>
   </QueryClientProvider>
 );
 
