@@ -199,11 +199,14 @@ export function Navbar() {
           <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
             <SheetTrigger asChild>
               <Button
-                variant="ghost"
+                variant="outline"
                 size="icon"
-                className="h-9 w-9 rounded-sm xl:hidden"
-                aria-label="Open menu"
+                className="size-10 rounded-sm border-border bg-card/80 xl:hidden"
+                aria-label={mobileOpen ? "Close navigation menu" : "Open navigation menu"}
+                aria-controls="mobile-navigation"
                 aria-expanded={mobileOpen}
+                title={mobileOpen ? "Close navigation menu" : "Open navigation menu"}
+                data-testid="mobile-menu-toggle"
               >
                 {mobileOpen ? (
                   <X className="h-5 w-5" aria-hidden="true" />
@@ -213,6 +216,7 @@ export function Navbar() {
               </Button>
             </SheetTrigger>
             <SheetContent
+              id="mobile-navigation"
               side="right"
               hideClose
               aria-describedby={undefined}
