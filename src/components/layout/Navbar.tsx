@@ -39,25 +39,22 @@ import { Logo } from "@/components/layout/Logo";
 import { ThemeToggle } from "@/components/layout/ThemeToggle";
 import { useAuth } from "@/features/auth/AuthProvider";
 import { cn } from "@/lib/utils";
+import { primaryNavigation, utilityNavigation } from "@/data/site/navigation";
 
-const primaryNav = [
-  { label: "Courses", href: "/courses", icon: BookOpen },
-  { label: "Learning Paths", href: "/learning-paths", icon: Compass },
-  { label: "Topics", href: "/topics", icon: Landmark },
-  { label: "Instructors", href: "/instructors", icon: GraduationCap },
-  { label: "Resources", href: "/resources", icon: Library },
-  { label: "About", href: "/about", icon: Info },
-];
-
-const utilityNav = [
-  { label: "My Learning", href: "/my-learning", icon: GraduationCap },
-  { label: "Saved", href: "/saved", icon: Bookmark },
-];
+const navigationIcons = {
+  book: BookOpen,
+  compass: Compass,
+  landmark: Landmark,
+  graduation: GraduationCap,
+  library: Library,
+  info: Info,
+  bookmark: Bookmark,
+} as const;
 
 function NavLinks({ onNavigate }: { onNavigate?: () => void }) {
   return (
     <nav aria-label="Primary" className="hidden items-center gap-0.5 xl:flex">
-      {primaryNav.map((item) => (
+      {primaryNavigation.map((item) => (
         <NavLink
           key={item.href}
           to={item.href}
@@ -274,8 +271,9 @@ export function Navbar() {
                 <ScrollArea className="flex-1 p-4">
                   {mobileSection === "main" ? (
                     <ul className="space-y-1">
-                      {primaryNav.map((item) => (
-                        <li key={item.href}>
+                      {primaryNavigation.map((item) => {
+                        const Icon = navigationIcons[item.icon];
+                        return <li key={item.href}>
                           <NavLink
                             to={item.href}
                             onClick={() => setMobileOpen(false)}
@@ -288,16 +286,17 @@ export function Navbar() {
                               )
                             }
                           >
-                            <item.icon className="h-4 w-4" aria-hidden="true" />
+                            <Icon className="h-4 w-4" aria-hidden="true" />
                             {item.label}
                           </NavLink>
-                        </li>
-                      ))}
+                        </li>;
+                      })}
                     </ul>
                   ) : (
                     <ul className="space-y-1">
-                      {utilityNav.map((item) => (
-                        <li key={item.href}>
+                      {utilityNavigation.map((item) => {
+                        const Icon = navigationIcons[item.icon];
+                        return <li key={item.href}>
                           <NavLink
                             to={item.href}
                             onClick={() => setMobileOpen(false)}
@@ -310,11 +309,11 @@ export function Navbar() {
                               )
                             }
                           >
-                            <item.icon className="h-4 w-4" aria-hidden="true" />
+                            <Icon className="h-4 w-4" aria-hidden="true" />
                             {item.label}
                           </NavLink>
-                        </li>
-                      ))}
+                        </li>;
+                      })}
                       <li>
                         <NavLink
                           to="/search"

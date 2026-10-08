@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import { FileText, Calendar, ExternalLink, ArrowRight, Filter, X } from "lucide-react";
+import { FileText, Calendar, ExternalLink, Filter, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import {
@@ -18,7 +18,6 @@ import { useSearchParams, useParams } from "react-router-dom";
 import { useDebounce } from "@/hooks/useDebounce";
 import { useState } from "react";
 import { formatDate } from "@/lib/format";
-import { cn } from "@/lib/utils";
 
 const typeOptions = Object.entries(resourceTypes).map(([value, label]) => ({
   value,
@@ -26,6 +25,7 @@ const typeOptions = Object.entries(resourceTypes).map(([value, label]) => ({
 }));
 
 export default function ResourcesPage() {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [query, setQuery] = useState(searchParams.get("q") ?? "");
   const [type, setType] = useState(searchParams.get("type") ?? "all");
   const debouncedQuery = useDebounce(query, 250);
@@ -154,10 +154,10 @@ export function ResourceDetailPage() {
           <div>
             <div className="flex items-center gap-2 mb-2">
               <Badge variant="outline">{resourceTypes[resource.type]}</Badge>
-              {resource.lastUpdated && (
+              {resource.updatedAt && (
                 <>
                   <Calendar className="h-3 w-3" aria-hidden="true" />
-                  <span className="text-xs text-muted-foreground">{formatDate(resource.lastUpdated)}</span>
+                  <span className="text-xs text-muted-foreground">{formatDate(resource.updatedAt)}</span>
                 </>
               )}
             </div>

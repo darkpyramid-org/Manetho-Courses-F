@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Landmark, BookOpen, GraduationCap, Library, ArrowRight, Users } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -25,8 +25,8 @@ export default function TopicsPage() {
       />
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {topics.map((topic) => (
-          <Card key={topic.id} className="h-full flex flex-col overflow-hidden" asChild>
-            <Link to={`/topics/${topic.slug}`}>
+          <Card key={topic.id} className="h-full flex flex-col overflow-hidden">
+            <Link to={`/topics/${topic.slug}`} className="block h-full">
               <div className="aspect-[4/3] relative overflow-hidden">
                 <ImageWithFallback
                   src={topic.image}

@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useMemo } from "react";
 import { Link } from "react-router-dom";
 import {
   CheckCircle2,
@@ -8,7 +8,7 @@ import {
   Award,
   RotateCcw,
 } from "lucide-react";
-import type { Quiz, QuizQuestion } from "@/types";
+import type { QuizQuestion } from "@/types";
 import { quizService } from "@/services/quizService";
 import { useCourseProgress } from "@/hooks/useCourseProgress";
 import { courseService } from "@/services/courseService";
@@ -19,7 +19,6 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
-import { formatDuration } from "@/lib/format";
 import { cn } from "@/lib/utils";
 
 interface AnswerState {
@@ -31,7 +30,7 @@ interface QuizResult {
   maxScore: number;
   percentage: number;
   passed: boolean;
-  answers: { questionId: string; correct: boolean; selected: string[]; correctOptions: string[] }[];
+  answers: { questionId: string; correct: boolean; selected: string[]; correctOptions: number[] }[];
 }
 
 /**
@@ -52,13 +51,26 @@ export function QuizPlayer({
   const course = courseService.getBySlug(courseSlug);
   const lesson = course?.modules.flatMap((m) => m.lessons).find((l) => l.slug === lessonSlug);
 
-  const { markLessonComplete, isLessonComplete } = useCourseProgress(course);
+  const { markLessonComplete } = useCourseProgress(course);
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState<AnswerState>({});
   const [submitted, setSubmitted] = useState(false);
   const [result, setResult] = useState<QuizResult | null>(null);
-  const [showFeedback, setShowFeedback] = useState(false);
+  const questions = useMemo(() => quiz?.questions ?? [], [quiz]);
+
+  const calculateResult = useCallback((): QuizResult => {
+    const results = questions.map((q) => {
+      const selected = answers[q.id] ?? [];
+      const correct = q.correctOptions.every((option) => selected.includes(String(option))) &&
+        selected.every((option) => q.correctOptions.includes(Number(option)));
+      return { questionId: q.id, correct, selected, correctOptions: q.correctOptions };
+    });
+    const score = results.filter((answer) => answer.correct).length;
+    const maxScore = questions.length;
+    const percentage = maxScore ? Math.round((score / maxScore) * 100) : 0;
+    return { score, maxScore, percentage, passed: percentage >= 70, answers: results };
+  }, [answers, questions]);
 
   if (!quiz || !course || !lesson) {
     return (
@@ -71,32 +83,11 @@ export function QuizPlayer({
     );
   }
 
-  const questions = quiz.questions;
+  if (questions.length === 0) {
+    return <div className="container py-12 text-center">This quiz has no questions yet.</div>;
+  }
+
   const question = questions[currentIndex];
-
-  // Calculate score when submitted
-  const calculateResult = useCallback((): QuizResult => {
-    const results = questions.map((q) => {
-      const selected = answers[q.id] ?? [];
-      const correct = q.correctOptions.every((opt) => selected.includes(opt)) &&
-        selected.every((opt) => q.correctOptions.includes(opt));
-      return {
-        questionId: q.id,
-        correct,
-        selected,
-        correctOptions: q.correctOptions,
-      };
-    });
-    const score = results.filter((r) => r.correct).length;
-    const maxScore = questions.length;
-    const percentage = Math.round((score / maxScore) * 100);
-    return { score, maxScore, percentage, passed: percentage >= 70, answers: results };
-  }, [answers, questions]);
-
-  const handleAnswerChange = (questionId: string, optionValues: string[]) => {
-    if (submitted) return;
-    setAnswers((prev) => ({ ...prev, [questionId]: optionValues }));
-  };
 
   const handleSingleSelect = (questionId: string, value: string) => {
     if (submitted) return;
@@ -130,26 +121,23 @@ export function QuizPlayer({
     setSubmitted(false);
     setResult(null);
     setCurrentIndex(0);
-    setShowFeedback(false);
   };
 
   const handleNext = () => {
     if (currentIndex < questions.length - 1) {
       setCurrentIndex((i) => i + 1);
-      setShowFeedback(false);
     }
   };
 
   const handlePrev = () => {
     if (currentIndex > 0) {
       setCurrentIndex((i) => i - 1);
-      setShowFeedback(false);
     }
   };
 
   const isAnswered = (q: QuizQuestion) => {
     const selected = answers[q.id] ?? [];
-    if (q.type === "single") return selected.length === 1;
+    if (q.type !== "multiple") return selected.length === 1;
     return selected.length > 0;
   };
 
@@ -219,26 +207,26 @@ export function QuizPlayer({
                       <div className="flex-1">
                         <p className="font-medium text-sm">{q.prompt}</p>
                         <div className="mt-2 space-y-1 text-xs">
-                          {q.options.map((opt) => (
+                          {q.options.map((opt, optionIndex) => (
                             <div
-                              key={opt.value}
+                              key={optionIndex}
                               className={cn(
                                 "flex items-center gap-2 px-2 py-1 rounded",
-                                answer.correctOptions.includes(opt.value)
+                                answer.correctOptions.includes(optionIndex)
                                   ? "bg-gold-500/20 text-gold-800 dark:text-gold-200"
-                                  : answer.selected.includes(opt.value)
+                                  : answer.selected.includes(String(optionIndex))
                                     ? "bg-terracotta-500/20 text-terracotta-800 dark:text-terracotta-200"
                                     : "text-muted-foreground",
                               )}
                             >
-                              {answer.correctOptions.includes(opt.value) && (
+                              {answer.correctOptions.includes(optionIndex) && (
                                 <CheckCircle2 className="h-3 w-3" aria-hidden="true" />
                               )}
-                              {answer.selected.includes(opt.value) &&
-                                !answer.correctOptions.includes(opt.value) && (
+                              {answer.selected.includes(String(optionIndex)) &&
+                                !answer.correctOptions.includes(optionIndex) && (
                                   <XCircle className="h-3 w-3" aria-hidden="true" />
                                 )}
-                              {opt.label}
+                              {opt}
                             </div>
                           ))}
                         </div>
@@ -292,34 +280,35 @@ export function QuizPlayer({
 
               <h3 className="display text-lg font-medium">{question.prompt}</h3>
 
-              {question.type === "single" ? (
+                {question.type !== "multiple" ? (
                 <RadioGroup
                   value={answers[question.id]?.[0] ?? ""}
                   onValueChange={(value) => handleSingleSelect(question.id, value)}
                   className="space-y-3"
                 >
-                  {question.options.map((opt) => (
-                    <div key={opt.value} className="flex items-center gap-3">
-                      <RadioGroupItem value={opt.value} id={`${question.id}-${opt.value}`} />
-                      <Label htmlFor={`${question.id}-${opt.value}`} className="cursor-pointer text-sm">
-                        {opt.label}
+                  {question.options.map((opt, optionIndex) => (
+                    <div key={optionIndex} className="flex items-center gap-3">
+                      <RadioGroupItem value={String(optionIndex)} id={`${question.id}-${optionIndex}`} />
+                      <Label htmlFor={`${question.id}-${optionIndex}`} className="cursor-pointer text-sm">
+                        {opt}
                       </Label>
                     </div>
                   ))}
                 </RadioGroup>
               ) : (
                 <div className="space-y-3" role="group" aria-label={question.prompt}>
-                  {question.options.map((opt) => {
-                    const checked = (answers[question.id] ?? []).includes(opt.value);
+                  {question.options.map((opt, optionIndex) => {
+                    const value = String(optionIndex);
+                    const checked = (answers[question.id] ?? []).includes(value);
                     return (
-                      <div key={opt.value} className="flex items-center gap-3">
+                      <div key={optionIndex} className="flex items-center gap-3">
                         <Checkbox
-                          id={`${question.id}-${opt.value}`}
+                          id={`${question.id}-${optionIndex}`}
                           checked={checked}
-                          onCheckedChange={(c) => handleMultiToggle(question.id, opt.value, c as boolean)}
+                          onCheckedChange={(c) => handleMultiToggle(question.id, value, c as boolean)}
                         />
-                        <Label htmlFor={`${question.id}-${opt.value}`} className="cursor-pointer text-sm">
-                          {opt.label}
+                        <Label htmlFor={`${question.id}-${optionIndex}`} className="cursor-pointer text-sm">
+                          {opt}
                         </Label>
                       </div>
                     );

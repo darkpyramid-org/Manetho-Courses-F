@@ -1,78 +1,30 @@
 import { Link } from "react-router-dom";
-import {
-  BookOpen,
-  Compass,
-  Landmark,
-  GraduationCap,
-  Library,
-  ArrowRight,
-  Sparkles,
-  Users,
-  Award,
-  Clock,
-} from "lucide-react";
+import { ArrowRight, Award, BookOpen, Compass, GraduationCap, Landmark, Library, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { CourseCard, CourseGrid } from "@/components/course/CourseCard";
+import { Badge } from "@/components/ui/badge";
+import { CourseGrid } from "@/components/course/CourseCard";
 import { PageHeader } from "@/components/shared/PageHeader";
 import { courseService } from "@/services/courseService";
-import { learningPathService } from "@/services/learningPathService";
+import { learningPathService, learningPathStats } from "@/services/learningPathService";
 import { topicService } from "@/services/topicService";
 import { instructorService } from "@/services/instructorService";
-import { cn } from "@/lib/utils";
+import { homeFeatures } from "@/data/site/home";
 
-const features = [
-  {
-    icon: BookOpen,
-    title: "Structured Courses",
-    description: "21 courses across history, religion, art, archaeology, and daily life — each with video, reading, and quizzes.",
-    href: "/courses",
-  },
-  {
-    icon: Compass,
-    title: "Learning Paths",
-    description: "6 curated paths guide you from foundations to specialized topics — complete with progress tracking.",
-    href: "/learning-paths",
-  },
-  {
-    icon: Landmark,
-    title: "Topic Deep Dives",
-    description: "12 topic pages collect related courses, resources, and instructors in one place.",
-    href: "/topics",
-  },
-  {
-    icon: GraduationCap,
-    title: "Expert Instructors",
-    description: "12 specialists in Egyptology, archaeology, art history, and ancient languages.",
-    href: "/instructors",
-  },
-  {
-    icon: Library,
-    title: "Primary Resources",
-    description: "24 timelines, maps, glossaries, and reference guides — all interlinked with courses.",
-    href: "/resources",
-  },
-  {
-    icon: Award,
-    title: "Certificates",
-    description: "Earn completion certificates for every finished course — shareable and verifiable.",
-    href: "/my-learning",
-  },
-];
+const featureIcons = { book: BookOpen, compass: Compass, landmark: Landmark, graduation: GraduationCap, library: Library, award: Award } as const;
 
-const stats = [
-  { label: "Courses", value: "21" },
-  { label: "Learning Paths", value: "6" },
-  { label: "Instructors", value: "12" },
-  { label: "Topics", value: "12" },
-];
-
-export default function HomePage() {
+export function HomePage() {
   const featured = courseService.getFeatured();
-  const recent = [...courseService.getAll()].sort((a, b) =>
-    new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
-  ).slice(0, 3);
+  const recent = [...courseService.getAll()]
+    .sort((a, b) => (b.publishedAt ?? "").localeCompare(a.publishedAt ?? ""))
+    .slice(0, 3);
   const paths = learningPathService.getAll().slice(0, 3);
+  const stats = [
+    { label: "Courses", value: courseService.getAll().length },
+    { label: "Learning Paths", value: learningPathService.getAll().length },
+    { label: "Instructors", value: instructorService.getAll().length },
+    { label: "Topics", value: topicService.getAll().length },
+  ];
 
   return (
     <div className="space-y-20">
@@ -88,13 +40,17 @@ export default function HomePage() {
             all grounded in archaeological evidence and scholarly consensus.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
-            <Button size="lg" asChild className="rounded-sm px-8 py-3 text-lg">
-              <Link to="/courses">Browse Courses</Link>
-              <ArrowRight className="ml-2 h-5 w-5" aria-hidden="true" />
-            </Button>
-            <Button size="lg" variant="outline" asChild className="rounded-sm px-8 py-3 text-lg">
-              <Link to="/learning-paths">Start a Learning Path</Link>
-            </Button>
+            <Link to="/courses">
+              <Button size="lg" className="rounded-sm px-8 py-3 text-lg">
+                Browse Courses
+                <ArrowRight className="ml-2 h-5 w-5" aria-hidden="true" />
+              </Button>
+            </Link>
+            <Link to="/learning-paths">
+              <Button size="lg" variant="outline" className="rounded-sm px-8 py-3 text-lg">
+                Start a Learning Path
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
@@ -147,11 +103,13 @@ export default function HomePage() {
         </div>
         <div className="container">
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {features.map((feature) => (
+            {homeFeatures.map((feature) => {
+              const Icon = featureIcons[feature.icon];
+              return (
               <Card key={feature.title} className="h-full transition-colors hover:border-gold-500/50">
                 <CardContent className="p-6">
                   <div className="flex h-11 w-11 items-center justify-center rounded-sm border border-gold-500/30 bg-gold-500/10 text-gold-700 dark:text-gold-300 mb-4" aria-hidden="true">
-                    <feature.icon className="h-5.5 w-5.5" />
+                    <Icon className="h-5.5 w-5.5" />
                   </div>
                   <h3 className="display text-lg font-semibold mb-2">{feature.title}</h3>
                   <p className="text-sm text-muted-foreground mb-4">{feature.description}</p>
@@ -161,7 +119,8 @@ export default function HomePage() {
                   </Link>
                 </CardContent>
               </Card>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
@@ -206,10 +165,10 @@ export default function HomePage() {
         <div className="container">
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {paths.map((path) => {
-              const stats = learningPathService.learningPathStats(path);
+              const stats = learningPathStats(path);
               return (
-                <Card key={path.id} className="h-full flex flex-col" asChild>
-                  <Link to={`/learning-paths/${path.slug}`}>
+                <Card key={path.id} className="h-full flex flex-col">
+                  <Link to={`/learning-paths/${path.slug}`} className="block h-full">
                     <CardContent className="p-6 flex-1 flex flex-col">
                       <Badge variant="secondary" className="text-[10px] mb-3 w-fit">{path.level}</Badge>
                       <h3 className="display text-lg font-semibold mb-2">{path.title}</h3>
@@ -237,13 +196,17 @@ export default function HomePage() {
             No payment, no spam — just learning.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
-            <Button size="lg" asChild className="rounded-sm px-8">
-              <Link to="/register">Start Free</Link>
-              <ArrowRight className="ml-2 h-5 w-5" aria-hidden="true" />
-            </Button>
-            <Button size="lg" variant="outline" asChild className="rounded-sm px-8">
-              <Link to="/courses">Browse Catalog</Link>
-            </Button>
+            <Link to="/register">
+              <Button size="lg" className="rounded-sm px-8">
+                Start Free
+                <ArrowRight className="ml-2 h-5 w-5" aria-hidden="true" />
+              </Button>
+            </Link>
+            <Link to="/courses">
+              <Button size="lg" variant="outline" className="rounded-sm px-8">
+                Browse Catalog
+              </Button>
+            </Link>
           </div>
         </div>
       </section>

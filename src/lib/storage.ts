@@ -36,3 +36,14 @@ export function storageRemove(key: string): void {
     // ignore
   }
 }
+
+/** Remove Manetho-owned values without touching other apps on this origin. */
+export function storageClear(): void {
+  if (typeof window === "undefined") return;
+  try {
+    const keys = Object.keys(window.localStorage).filter((key) => key.startsWith(PREFIX));
+    keys.forEach((key) => window.localStorage.removeItem(key));
+  } catch {
+    // Storage unavailable (private mode, quota) — fail silently.
+  }
+}

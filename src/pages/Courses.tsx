@@ -1,6 +1,4 @@
 import { useMemo, useState } from "react";
-import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -9,30 +7,13 @@ import { courseService } from "@/services/courseService";
 import { instructorService } from "@/services/instructorService";
 import { formatDuration } from "@/lib/format";
 import type { Course, CourseCategory, CourseLevel } from "@/types";
+import { courseCategoryFilters, courseLevelFilters } from "@/data/courseOptions";
 
 type CategoryFilter = "all" | CourseCategory;
 type LevelFilter = "all" | CourseLevel;
 
-const categories: { value: CategoryFilter; label: string }[] = [
-  { value: "all", label: "All subjects" },
-  { value: "ancient-egypt", label: "Ancient Egypt" },
-  { value: "pharaohs", label: "Pharaohs" },
-  { value: "archaeology", label: "Archaeology" },
-  { value: "mythology", label: "Mythology" },
-  { value: "religion", label: "Religion" },
-  { value: "hieroglyphs", label: "Hieroglyphs" },
-  { value: "art-architecture", label: "Art & architecture" },
-  { value: "daily-life", label: "Daily life" },
-  { value: "egyptian-language", label: "Egyptian language" },
-  { value: "discoveries", label: "Discoveries" },
-];
-
-const levels: { value: LevelFilter; label: string }[] = [
-  { value: "all", label: "All levels" },
-  { value: "beginner", label: "Beginner" },
-  { value: "intermediate", label: "Intermediate" },
-  { value: "advanced", label: "Advanced" },
-];
+const categories: { value: CategoryFilter; label: string }[] = courseCategoryFilters;
+const levels: { value: LevelFilter; label: string }[] = courseLevelFilters;
 
 const levelStyles: Record<CourseLevel, string> = {
   beginner: "border-fern-500/30 bg-fern-500/20 text-fern-400",
@@ -90,10 +71,7 @@ export default function Courses() {
   }, [courses, search, category, level]);
 
   return (
-    <div className="min-h-screen bg-background">
-      <Navbar />
-      <main className="pt-28 pb-16 sm:pt-32 sm:pb-20">
-        <div className="container mx-auto px-4 sm:px-6">
+    <div className="container py-12">
           <header className="mx-auto mb-10 max-w-3xl text-center sm:mb-12">
             <p className="mb-3 text-sm font-medium uppercase tracking-[0.2em] text-primary">Manetho curriculum</p>
             <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">Course <span className="text-gradient">catalog</span></h1>
@@ -126,9 +104,6 @@ export default function Courses() {
           ) : (
             <div className="py-20 text-center"><BookOpen className="mx-auto mb-4 size-12 text-muted-foreground" /><h2 className="text-lg font-semibold">No courses found</h2><p className="mt-2 text-muted-foreground">Try adjusting your search or filters.</p><Button variant="outline" className="mt-4" onClick={() => { setSearch(""); setCategory("all"); setLevel("all"); }}>Clear filters</Button></div>
           )}
-        </div>
-      </main>
-      <Footer />
     </div>
   );
 }

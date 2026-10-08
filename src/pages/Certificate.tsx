@@ -2,12 +2,10 @@ import { useParams, Link } from "react-router-dom";
 import { Award, User, Calendar, ArrowLeft, Shield, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { PageHeader } from "@/components/shared/PageHeader";
 import { Breadcrumbs } from "@/components/shared/Breadcrumbs";
 import { useProgress } from "@/features/progress/ProgressProvider";
 import { courseService } from "@/services/courseService";
-import { formatDate } from "@/lib/format";
+import { formatDuration } from "@/lib/format";
 
 export default function CertificatePage() {
   const { certId } = useParams<{ certId: string }>();

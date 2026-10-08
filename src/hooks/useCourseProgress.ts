@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import type { Course, CourseProgress } from "@/types";
 import { useProgress } from "@/features/progress/ProgressProvider";
 import { flattenCourse } from "@/services/courseService";
@@ -29,6 +29,12 @@ export function useCourseProgress(course: Course | undefined) {
   const totalLessons = course?.lessonCount ?? 0;
   const isComplete = percentage === 100;
   const isStarted = percentage > 0 && percentage < 100;
+  const updateCurrentLesson = useCallback(
+    (lessonId: string) => {
+      if (courseId) setCurrentLesson(courseId, lessonId);
+    },
+    [courseId, setCurrentLesson],
+  );
 
   const currentLessonSlug = useMemo(() => {
     if (!course) return null;
@@ -74,9 +80,7 @@ export function useCourseProgress(course: Course | undefined) {
     },
     isLessonComplete: (lessonId: string) =>
       courseId ? isLessonComplete(courseId, lessonId) : false,
-    setCurrentLesson: (lessonId: string) => {
-      if (courseId) setCurrentLesson(courseId, lessonId);
-    },
+    setCurrentLesson: updateCurrentLesson,
     resetCourse: () => {
       if (courseId) resetCourse(courseId);
     },

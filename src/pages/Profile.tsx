@@ -4,18 +4,17 @@ import { User, Mail, Save, RotateCcw, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { useAuth } from "@/features/auth/AuthProvider";
 import { useProgress } from "@/features/progress/ProgressProvider";
 import { useBookmarks } from "@/features/bookmarks/BookmarkProvider";
 import { formatDuration } from "@/lib/format";
-import { cn } from "@/lib/utils";
+import { storageClear } from "@/lib/storage";
 
 export default function ProfilePage() {
-  const { user, updateProfile, signOut, isDemo } = useAuth();
-  const { getStats, resetCourse, getAllProgress } = useProgress();
+  const { user, updateProfile, isDemo } = useAuth();
+  const { getStats } = useProgress();
   const { saved } = useBookmarks();
 
   const [name, setName] = useState(user?.name ?? "");
@@ -42,7 +41,7 @@ export default function ProfilePage() {
 
   const handleResetAll = () => {
     if (confirm("This will delete ALL your progress, certificates, and bookmarks. This cannot be undone.")) {
-      localStorage.clear();
+      storageClear();
       window.location.reload();
     }
   };

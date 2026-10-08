@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { GraduationCap, BookOpen, Award, User, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -20,14 +19,13 @@ export default function InstructorsPage() {
       <PageHeader
         eyebrow="Meet the Experts"
         title="Instructors"
-        description="Scholars, archaeologists, and educators specializing in Ancient Egypt. Each brings deep expertise in their field."
+        description="Explore the illustrative course authors represented in the Manetho demo catalog."
       />
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {instructors.map((instructor) => {
-          const courses = instructor.courseIds.map((id) => courseService.getById(id)).filter((c): c is NonNullable<typeof c> => Boolean(c));
           return (
-            <Card key={instructor.id} className="h-full flex flex-col" asChild>
-              <Link to={`/instructors/${instructor.slug}`}>
+            <Card key={instructor.id} className="h-full flex flex-col">
+              <Link to={`/instructors/${instructor.slug}`} className="block h-full">
                 <CardContent className="p-6 flex-1 flex flex-col">
                   <div className="flex items-start gap-4 mb-4">
                     <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-sm border border-gold-500/30 bg-gold-500/15 font-serif text-xl font-semibold text-gold-700 dark:text-gold-300" aria-hidden="true">
@@ -146,23 +144,6 @@ export function InstructorDetailPage() {
             </CardContent>
           </Card>
 
-          {instructor.credentials.length > 0 && (
-            <Card>
-              <CardHeader>
-                <CardTitle className="display text-lg">Credentials</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-2 text-sm text-muted-foreground">
-                  {instructor.credentials.map((cred, i) => (
-                    <li key={i} className="flex items-start gap-2">
-                      <Award className="mt-0.5 h-4 w-4 flex-shrink-0 text-gold-500" aria-hidden="true" />
-                      {cred}
-                    </li>
-                  ))}
-                </ul>
-              </CardContent>
-            </Card>
-          )}
         </aside>
       </div>
     </div>

@@ -8,10 +8,8 @@ import {
   Landmark,
   GraduationCap,
   Library,
-  User,
   FileText,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -20,13 +18,9 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/components/ui/tabs";
-import { Separator } from "@/components/ui/separator";
-import { ImageWithFallback } from "@/components/shared/ImageWithFallback";
 import { EmptyState } from "@/components/shared/EmptyState";
 import { searchCatalog, searchCounts, SearchResult, SearchTab } from "@/services/searchService";
 import { useDebounce } from "@/hooks/useDebounce";
-import { formatDuration } from "@/lib/format";
-import { cn } from "@/lib/utils";
 
 const tabConfig: { value: SearchTab; label: string; icon: React.ReactNode }[] = [
   { value: "all", label: "All", icon: <Search className="h-4 w-4" /> },
@@ -46,6 +40,7 @@ export default function SearchPage() {
 
   const results = debouncedQuery.trim() ? searchCatalog(debouncedQuery, activeTab) : [];
   const counts = debouncedQuery.trim() ? searchCounts(debouncedQuery) : null;
+  const getTabCount = (tab: SearchTab) => tab === "all" ? results.length : counts?.[tab] ?? 0;
 
   const handleSearch = (newQuery: string) => {
     setQuery(newQuery);
@@ -96,15 +91,15 @@ export default function SearchPage() {
 
       {/* Tabs with counts */}
       {debouncedQuery.trim() && (
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="mb-6">
+        <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as SearchTab)} className="mb-6">
           <TabsList className="grid w-full grid-cols-3 sm:grid-cols-6">
             {tabConfig.map((tab) => (
               <TabsTrigger key={tab.value} value={tab.value} className="gap-2 px-3 py-2 text-sm">
                 {tab.icon}
                 <span>{tab.label}</span>
-                {counts && counts[tab.value] > 0 && (
+                {getTabCount(tab.value) > 0 && (
                   <Badge variant="secondary" className="ml-1 h-5 px-1.5 text-[10px]">
-                    {counts[tab.value]}
+                    {getTabCount(tab.value)}
                   </Badge>
                 )}
               </TabsTrigger>
@@ -116,7 +111,7 @@ export default function SearchPage() {
       {/* Results */}
       {debouncedQuery.trim() ? (
         results.length > 0 ? (
-          <Tabs value={activeTab} onValueChange={setActiveTab}>
+          <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as SearchTab)}>
             {tabConfig.map((tab) => (
               <TabsContent key={tab.value} value={tab.value} className="mt-4">
                 {tab.value === "all" ? (

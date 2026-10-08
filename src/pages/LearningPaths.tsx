@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
-import { Compass, BookOpen, Clock, Award, ArrowRight } from "lucide-react";
+import { BookOpen, Clock, Award, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { PageHeader } from "@/components/shared/PageHeader";
 import { Breadcrumbs } from "@/components/shared/Breadcrumbs";
 import { ImageWithFallback } from "@/components/shared/ImageWithFallback";
-import { learningPathService } from "@/services/learningPathService";
+import { learningPathService, learningPathStats } from "@/services/learningPathService";
 import { courseService } from "@/services/courseService";
 import { formatDuration } from "@/lib/format";
 import { useParams } from "react-router-dom";
@@ -24,10 +24,10 @@ export default function LearningPathsPage() {
       />
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {paths.map((path) => {
-          const stats = learningPathService.learningPathStats(path);
+          const stats = learningPathStats(path);
           return (
-            <Card key={path.id} className="h-full flex flex-col" asChild>
-              <Link to={`/learning-paths/${path.slug}`}>
+            <Card key={path.id} className="h-full flex flex-col">
+              <Link to={`/learning-paths/${path.slug}`} className="block h-full">
                 <CardHeader>
                   <div className="flex items-center justify-between mb-2">
                     <Badge variant="secondary" className="text-[10px]">{path.level}</Badge>
@@ -42,9 +42,6 @@ export default function LearningPathsPage() {
                     <span className="flex items-center gap-1"><Clock className="h-3 w-3" />{stats.durationLabel}</span>
                     <span className="flex items-center gap-1"><Award className="h-3 w-3" />{stats.courseCount} courses</span>
                   </div>
-                  <Button variant="outline" className="w-full rounded-sm" asChild>
-                    <Link to={`/learning-paths/${path.slug}`}>View Path</Link>
-                  </Button>
                 </CardContent>
               </Link>
             </Card>
@@ -68,7 +65,7 @@ export function LearningPathDetailPage() {
     );
   }
 
-  const stats = learningPathService.learningPathStats(path);
+  const stats = learningPathStats(path);
   const courses = stats.courses;
 
   return (

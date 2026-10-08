@@ -67,23 +67,22 @@ export function Hero() {
             className="flex flex-col items-center justify-center gap-4 opacity-0 animate-fade-in sm:flex-row"
             style={{ animationDelay: "300ms" }}
           >
-            <Button asChild size="lg" className="group min-w-[180px] glow-primary">
-              <Link to="/courses">
+            <Link to="/courses">
+              <Button size="lg" className="group min-w-[180px] glow-primary">
                 Start Learning
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Link>
-            </Button>
-            <Button
-              asChild
-              variant="outline"
-              size="lg"
-              className="min-w-[180px] border-border bg-transparent hover:bg-secondary"
-            >
-              <Link to="/courses">
+              </Button>
+            </Link>
+            <Link to="/courses">
+              <Button
+                variant="outline"
+                size="lg"
+                className="min-w-[180px] border-border bg-transparent hover:bg-secondary"
+              >
                 <Play className="mr-2 h-4 w-4" />
                 Explore Courses
-              </Link>
-            </Button>
+              </Button>
+            </Link>
           </div>
 
           {/* Stats */}

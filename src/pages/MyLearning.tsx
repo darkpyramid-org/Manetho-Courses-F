@@ -2,13 +2,10 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { BookOpen, Award, CheckCircle2, Clock } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { PageHeader } from "@/components/shared/PageHeader";
 import { Breadcrumbs } from "@/components/shared/Breadcrumbs";
 import { useAuth } from "@/features/auth/AuthProvider";
 import { useProgress } from "@/features/progress/ProgressProvider";
-import { courseService } from "@/services/courseService";
 import { learningPathService } from "@/services/learningPathService";
 import {
   ContinueLearning,
@@ -57,7 +54,7 @@ export default function MyLearningPage() {
       {/* Stats */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 mb-8">
         <StatCard label="Courses Started" value={stats.coursesStarted} icon={<BookOpen className="h-5 w-5" />} />
-        <StatCard label="Courses Completed" value={stats.coursesCompleted} icon={<Award className="h-5 w-5" />} trend="+2 this month" />
+        <StatCard label="Courses Completed" value={stats.coursesCompleted} icon={<Award className="h-5 w-5" />} />
         <StatCard label="Lessons Completed" value={stats.lessonsCompleted} icon={<CheckCircle2 className="h-5 w-5" />} />
         <StatCard label="Time Learning" value={formatDuration(stats.totalMinutes)} icon={<Clock className="h-5 w-5" />} />
       </div>

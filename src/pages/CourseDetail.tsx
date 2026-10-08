@@ -1,25 +1,26 @@
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, Clock, Layers, User, CheckCircle2, Bookmark, BookmarkCheck } from "lucide-react";
+import { Clock, Layers, CheckCircle2, Bookmark, BookmarkCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { ImageWithFallback } from "@/components/shared/ImageWithFallback";
-import { PageHeader } from "@/components/shared/PageHeader";
 import { Breadcrumbs } from "@/components/shared/Breadcrumbs";
 import { LevelBadge, CategoryLabel } from "@/components/shared/LevelBadge";
 import { courseService } from "@/services/courseService";
 import { instructorService } from "@/services/instructorService";
 import { learningPathService } from "@/services/learningPathService";
-import { useProgress } from "@/features/progress/ProgressProvider";
 import { useBookmarks } from "@/features/bookmarks/BookmarkProvider";
 import { useCourseProgress } from "@/hooks/useCourseProgress";
 import { formatDuration } from "@/lib/format";
 import { cn } from "@/lib/utils";
+import { Progress } from "@/components/ui/progress";
 
 export default function CourseDetailPage() {
   const { courseSlug } = useParams<{ courseSlug: string }>();
   const course = courseService.getBySlug(courseSlug ?? "");
+  const courseProgress = useCourseProgress(course);
+  const bookmarks = useBookmarks();
 
   if (!course) {
     return (
@@ -31,8 +32,8 @@ export default function CourseDetailPage() {
   }
 
   const instructor = instructorService.getById(course.instructorId);
-  const { percentage, isStarted, isComplete, nextLessonSlug, markLessonComplete, isLessonComplete, getPercentage } = useCourseProgress(course);
-  const { isSaved, toggle } = useBookmarks();
+  const { percentage, isStarted, isComplete, nextLessonSlug, isLessonComplete } = courseProgress;
+  const { isSaved, toggle } = bookmarks;
   const saved = isSaved(course.id);
   const related = courseService.getRelated(course, 4);
 
@@ -247,12 +248,14 @@ export default function CourseDetailPage() {
                   </div>
                   <h3 className="display text-lg">Course Completed</h3>
                   <p className="text-sm text-muted-foreground">You've finished all {course.lessonCount} lessons.</p>
-                  <Link to={`/my-learning/certificates`}>
-                    <Button className="w-full rounded-sm">View Certificate</Button>
+                  <Link to="/my-learning">
+                    <Button className="w-full rounded-sm">View My Learning</Button>
                   </Link>
-                  <Button variant="outline" onClick={() => markLessonComplete(course.modules[0].lessons[0].id)} className="w-full rounded-sm">
-                    Review Course
-                  </Button>
+                  {course.modules[0]?.lessons[0] && (
+                    <Button variant="outline" asChild className="w-full rounded-sm">
+                      <Link to={`/learn/${course.slug}/${course.modules[0].lessons[0].slug}`}>Review Course</Link>
+                    </Button>
+                  )}
                 </div>
               ) : isStarted ? (
                 <div className="space-y-4">
@@ -298,7 +301,7 @@ export default function CourseDetailPage() {
                 </div>
                 <div className="flex items-center justify-between text-muted-foreground">
                   <span>Last Updated</span>
-                  <span className="font-medium text-foreground">{new Date(course.updatedAt).toLocaleDateString("en-GB", { month: "short", year: "numeric" })}</span>
+                  <span className="font-medium text-foreground">{course.updatedAt ? new Date(course.updatedAt).toLocaleDateString("en-GB", { month: "short", year: "numeric" }) : "—"}</span>
                 </div>
               </div>
             </CardContent>

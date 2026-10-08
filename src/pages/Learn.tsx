@@ -1,9 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { LayoutList, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent } from "@/components/ui/sheet";
-import { Curriculum, LessonHeader, LessonNavigation, LessonBody, MobileCurriculumSheet, lessonTypeLabel } from "@/components/learning/Curriculum";
+import { Curriculum, LessonHeader, LessonNavigation, MobileCurriculumSheet, lessonTypeLabel } from "@/components/learning/Curriculum";
 import { LessonBody as LessonBodyRenderer } from "@/components/learning/LessonBody";
 import { useCourseProgress } from "@/hooks/useCourseProgress";
 import { courseService, findLesson, lessonNeighbours, lessonNumber } from "@/services/courseService";
@@ -13,6 +10,22 @@ export default function LearnPage() {
   const navigate = useNavigate();
   const course = courseService.getBySlug(courseSlug ?? "");
   const [mobileCurriculumOpen, setMobileCurriculumOpen] = useState(false);
+  const lessonLocation = course ? findLesson(course, lessonSlug ?? "") : undefined;
+  const lesson = course && lessonLocation
+    ? course.modules[lessonLocation.moduleIndex].lessons[lessonLocation.lessonIndex]
+    : undefined;
+  const { setCurrentLesson } = useCourseProgress(course);
+
+  useEffect(() => {
+    if (course && !lesson) {
+      const firstLesson = course.modules[0]?.lessons[0];
+      if (firstLesson) navigate(`/learn/${course.slug}/${firstLesson.slug}`, { replace: true });
+    }
+  }, [course, lesson, navigate]);
+
+  useEffect(() => {
+    if (lesson) setCurrentLesson(lesson.id);
+  }, [lesson, setCurrentLesson]);
 
   if (!course) {
     return (
@@ -23,36 +36,15 @@ export default function LearnPage() {
     );
   }
 
-  const lessonLocation = findLesson(course, lessonSlug ?? "");
   if (!lessonLocation) {
-    // Redirect to first lesson
-    const firstLesson = course.modules[0]?.lessons[0];
-    if (firstLesson) navigate(`/learn/${courseSlug}/${firstLesson.slug}`, { replace: true });
     return null;
   }
-
-  const lesson = course.modules[lessonLocation.moduleIndex].lessons[lessonLocation.lessonIndex];
-  const { setCurrentLesson, isLessonComplete, markLessonComplete } = useCourseProgress(course);
+  if (!lesson) return null;
   const neighbours = lessonNeighbours(course, lessonSlug ?? "");
-
-  useEffect(() => {
-    setCurrentLesson(lesson.id);
-  }, [lesson.id, setCurrentLesson]);
 
   const handlePrevious = () => {
     if (neighbours.prev) {
       navigate(`/learn/${courseSlug}/${neighbours.prev.slug}`);
-    }
-  };
-
-  const handleNext = () => {
-    if (!isLessonComplete(lesson.id)) {
-      markLessonComplete(lesson.id);
-    }
-    if (neighbours.next) {
-      navigate(`/learn/${courseSlug}/${neighbours.next.slug}`);
-    } else {
-      navigate(`/courses/${courseSlug}`);
     }
   };
 
@@ -110,7 +102,6 @@ export default function LearnPage() {
               course={course}
               lesson={lesson}
               onPrevious={handlePrevious}
-              onNext={handleNext}
             />
           </div>
         </main>

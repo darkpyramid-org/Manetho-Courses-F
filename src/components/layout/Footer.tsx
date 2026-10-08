@@ -1,36 +1,6 @@
 import { Link } from "react-router-dom";
 import { Logo } from "@/components/layout/Logo";
-
-const footerColumns = [
-  {
-    title: "Learn",
-    links: [
-      { label: "Courses", href: "/courses" },
-      { label: "Learning Paths", href: "/learning-paths" },
-      { label: "Topics", href: "/topics" },
-      { label: "Instructors", href: "/instructors" },
-      { label: "Resources", href: "/resources" },
-    ],
-  },
-  {
-    title: "My Manetho",
-    links: [
-      { label: "My Learning", href: "/my-learning" },
-      { label: "Saved Courses", href: "/saved" },
-      { label: "Certificates", href: "/my-learning/certificates" },
-      { label: "Profile", href: "/profile" },
-    ],
-  },
-  {
-    title: "Platform",
-    links: [
-      { label: "About Manetho", href: "/about" },
-      { label: "Search", href: "/search" },
-      { label: "Sign in", href: "/login" },
-      { label: "Register", href: "/register" },
-    ],
-  },
-];
+import { footerSections } from "@/data/site/navigation";
 
 export function Footer() {
   return (
@@ -51,12 +21,12 @@ export function Footer() {
             </p>
           </div>
 
-          {footerColumns.map((column) => (
+          {footerSections.map((column) => (
             <nav key={column.title} aria-label={column.title}>
               <h3 className="eyebrow mb-4">{column.title}</h3>
               <ul className="space-y-2.5">
-                {column.links.map((link) => (
-                  <li key={link.href}>
+                {column.links.map((link, idx) => (
+                  <li key={`${column.title}-${idx}`}>
                     <Link
                       to={link.href}
                       className="text-sm text-muted-foreground transition-colors hover:text-foreground"

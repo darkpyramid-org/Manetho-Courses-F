@@ -1,25 +1,20 @@
 import { Link } from "react-router-dom";
 import {
   Play,
-  FileText,
   Puzzle,
   BookOpen,
-  Image as ImageIcon,
   Clock,
   ArrowRight,
   ExternalLink,
   Calendar,
   CheckCircle2,
 } from "lucide-react";
-import type { Lesson, LessonType, Resource } from "@/types";
+import type { Lesson, Resource } from "@/types";
 import { lessonTypeIcon, lessonTypeLabel } from "@/components/learning/Curriculum";
 import { resourceService } from "@/services/resourceService";
 import { formatDate } from "@/lib/format";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Separator } from "@/components/ui/separator";
 import { ImageWithFallback } from "@/components/shared/ImageWithFallback";
 import { cn } from "@/lib/utils";
 

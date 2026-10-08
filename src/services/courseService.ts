@@ -1,5 +1,6 @@
 import type { Course, CourseCategory, CourseLevel } from "@/types";
 import { courses } from "@/data/courses";
+import { courseCategories, courseLevels } from "@/data/courseOptions";
 
 /**
  * Course repository.
@@ -56,24 +57,7 @@ export const courseService: CourseRepository = {
       .slice(0, limit),
 };
 
-export const courseCategories: { value: CourseCategory; label: string }[] = [
-  { value: "ancient-egypt", label: "Ancient Egypt" },
-  { value: "pharaohs", label: "Pharaohs" },
-  { value: "archaeology", label: "Archaeology" },
-  { value: "mythology", label: "Mythology" },
-  { value: "religion", label: "Religion" },
-  { value: "hieroglyphs", label: "Hieroglyphs" },
-  { value: "art-architecture", label: "Art & Architecture" },
-  { value: "daily-life", label: "Daily Life" },
-  { value: "egyptian-language", label: "Egyptian Language" },
-  { value: "discoveries", label: "Discoveries" },
-];
-
-export const courseLevels: { value: CourseLevel; label: string }[] = [
-  { value: "beginner", label: "Beginner" },
-  { value: "intermediate", label: "Intermediate" },
-  { value: "advanced", label: "Advanced" },
-];
+export { courseCategories, courseLevels };
 
 export function categoryLabel(category: CourseCategory): string {
   return (

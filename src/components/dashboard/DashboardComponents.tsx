@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import {
   BookOpen,
   Award,
-  Bookmark,
   Clock,
   ArrowRight,
   CheckCircle2,
@@ -14,14 +13,11 @@ import { useProgress } from "@/features/progress/ProgressProvider";
 import { useBookmarks } from "@/features/bookmarks/BookmarkProvider";
 import { formatDuration } from "@/lib/format";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Separator } from "@/components/ui/separator";
 import { ImageWithFallback } from "@/components/shared/ImageWithFallback";
 import { LevelBadge, CategoryLabel } from "@/components/shared/LevelBadge";
-import { cn } from "@/lib/utils";
 
 /** ContinueLearning — shows the top in-progress course with a Continue button. */
 export function ContinueLearning() {
@@ -216,7 +212,6 @@ export function InProgressCourseCard({ progress }: { progress: CourseProgress })
   const course = courseService.getById(progress.courseId);
   if (!course) return null;
 
-  const { isLessonComplete } = useProgress(course);
   const completedCount = progress.completedLessons.length;
 
   return (
@@ -268,12 +263,12 @@ function findNextLessonSlug(course: Course, completed: string[]): string {
 
 /** SavedCourseCard — card for a bookmarked course in the "Saved" tab. */
 export function SavedCourseCard({ courseId }: { courseId: string }) {
+  const { getPercentage } = useProgress();
+  const { remove } = useBookmarks();
   const course = courseService.getById(courseId);
   if (!course) return null;
 
-  const { getPercentage } = useProgress(course);
   const percentage = getPercentage(course.id);
-  const { remove } = useBookmarks();
   const isStarted = percentage > 0;
 
   return (

@@ -1,43 +1,7 @@
-import { Code2, Layers, Zap, Users, Shield, Rocket } from "lucide-react";
+import { Award, BookOpen, Compass, GraduationCap, Landmark, Library } from "lucide-react";
+import { homeFeatures } from "@/data/site/home";
 
-const features = [
-  {
-    icon: Code2,
-    title: "Explore Every Era",
-    description:
-      "Move from the earliest dynasties to the Ptolemaic period with clear, structured lessons.",
-  },
-  {
-    icon: Layers,
-    title: "Structured Paths",
-    description:
-      "Follow curated learning paths from beginner to advanced, designed by experts.",
-  },
-  {
-    icon: Zap,
-    title: "Learn in Context",
-    description:
-      "Connect rulers, beliefs, places, and daily life to see how ancient Egypt fits together.",
-  },
-  {
-    icon: Users,
-    title: "Study the Sources",
-    description:
-      "Build your understanding with guided reading, visual references, and trusted historical context.",
-  },
-  {
-    icon: Shield,
-    title: "Track Your Progress",
-    description:
-      "Keep your learning organized with bookmarks, progress tracking, and completed-course milestones.",
-  },
-  {
-    icon: Rocket,
-    title: "Keep Discovering",
-    description:
-      "Save fascinating courses and return to the topics you want to explore more deeply.",
-  },
-];
+const featureIcons = { book: BookOpen, compass: Compass, landmark: Landmark, graduation: GraduationCap, library: Library, award: Award } as const;
 
 export function Features() {
   return (
@@ -59,7 +23,9 @@ Everything in Manetho is designed to help you learn consistently and build confi
 
         {/* Features grid */}
         <div className="mx-auto grid max-w-5xl gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {features.map((feature, index) => (
+          {homeFeatures.map((feature, index) => {
+            const Icon = featureIcons[feature.icon];
+            return (
             <div
               key={feature.title}
               className="group relative rounded-2xl border border-border bg-card/50 p-6 transition-smooth hover:border-primary/50 hover:bg-card"
@@ -70,7 +36,7 @@ Everything in Manetho is designed to help you learn consistently and build confi
 
               <div className="relative">
                 <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary transition-smooth group-hover:bg-primary group-hover:text-primary-foreground">
-                  <feature.icon className="h-6 w-6" />
+                  <Icon className="h-6 w-6" />
                 </div>
                 <h3 className="mb-2 text-lg font-semibold text-foreground">
                   {feature.title}
@@ -80,7 +46,8 @@ Everything in Manetho is designed to help you learn consistently and build confi
                 </p>
               </div>
             </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
