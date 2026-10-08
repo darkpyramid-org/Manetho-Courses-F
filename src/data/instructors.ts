@@ -165,7 +165,6 @@ export const instructors: Instructor[] = [
     ],
     courseIds: [
       "course-discovery-tutankhamun-tomb",
-      "course-tutankhamun-and-his-world",
     ],
     initials: "ER",
   },

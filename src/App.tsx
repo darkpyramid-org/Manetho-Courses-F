@@ -10,10 +10,10 @@ import { CoursesPage } from "@/pages/Courses";
 import { CourseDetailPage } from "@/pages/CourseDetail";
 import { LearnPage } from "@/pages/Learn";
 import { QuizPage } from "@/pages/Quiz";
-import { LearningPathsPage } from "@/pages/LearningPaths";
-import { TopicsPage } from "@/pages/Topics";
+import { LearningPathsPage, LearningPathDetailPage } from "@/pages/LearningPaths";
+import { TopicsPage, TopicDetailPage } from "@/pages/Topics";
 import { InstructorsPage } from "@/pages/Instructors";
-import { ResourcesPage } from "@/pages/Resources";
+import { ResourcesPage, ResourceDetailPage } from "@/pages/Resources";
 import { SearchPage } from "@/pages/Search";
 import { MyLearningPage } from "@/pages/MyLearning";
 import { SavedPage } from "@/pages/Saved";
@@ -41,9 +41,12 @@ export function App() {
                   <Route path="/learn/:courseSlug/:lessonSlug" element={<Suspense fallback={<LoadingFallback />}><LearnPage /></Suspense>} />
                   <Route path="/quiz/:courseSlug/:lessonSlug" element={<Suspense fallback={<LoadingFallback />}><QuizPage /></Suspense>} />
                   <Route path="/learning-paths" element={<Suspense fallback={<LoadingFallback />}><LearningPathsPage /></Suspense>} />
+                  <Route path="/learning-paths/:pathSlug" element={<Suspense fallback={<LoadingFallback />}><LearningPathDetailPage /></Suspense>} />
                   <Route path="/topics" element={<Suspense fallback={<LoadingFallback />}><TopicsPage /></Suspense>} />
+                  <Route path="/topics/:topicSlug" element={<Suspense fallback={<LoadingFallback />}><TopicDetailPage /></Suspense>} />
                   <Route path="/instructors" element={<Suspense fallback={<LoadingFallback />}><InstructorsPage /></Suspense>} />
                   <Route path="/resources" element={<Suspense fallback={<LoadingFallback />}><ResourcesPage /></Suspense>} />
+                  <Route path="/resources/:resourceSlug" element={<Suspense fallback={<LoadingFallback />}><ResourceDetailPage /></Suspense>} />
                   <Route path="/search" element={<Suspense fallback={<LoadingFallback />}><SearchPage /></Suspense>} />
                   <Route path="/my-learning" element={<Suspense fallback={<LoadingFallback />}><MyLearningPage /></Suspense>} />
                   <Route path="/saved" element={<Suspense fallback={<LoadingFallback />}><SavedPage /></Suspense>} />
