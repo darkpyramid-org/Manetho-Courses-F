@@ -92,10 +92,10 @@ export default function ResourcesPage() {
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1">
                       <Badge variant="outline" className="text-[10px]">{resourceTypes[resource.type]}</Badge>
-                      {resource.lastUpdated && (
+                      {resource.updatedAt && (
                         <>
                           <Calendar className="h-3 w-3" aria-hidden="true" />
-                          <span className="text-xs text-muted-foreground">{formatDate(resource.lastUpdated)}</span>
+                          <span className="text-xs text-muted-foreground">{formatDate(resource.updatedAt)}</span>
                         </>
                       )}
                     </div>
@@ -180,18 +180,11 @@ export function ResourceDetailPage() {
                 <span className="text-muted-foreground">Type</span>
                 <span className="font-medium">{resourceTypes[resource.type]}</span>
               </div>
-              {resource.lastUpdated && (
+              {resource.updatedAt && (
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Last Updated</span>
-                  <span className="font-medium">{formatDate(resource.lastUpdated)}</span>
+                  <span className="font-medium">{formatDate(resource.updatedAt)}</span>
                 </div>
-              )}
-              {resource.sourceUrl && (
-                <Button variant="outline" asChild className="w-full rounded-sm">
-                  <a href={resource.sourceUrl} target="_blank" rel="noopener noreferrer">
-                    View Source <ExternalLink className="ml-1.5 h-3.5 w-3.5" aria-hidden="true" />
-                  </a>
-                </Button>
               )}
             </CardContent>
           </Card>

@@ -9,6 +9,7 @@ import {
   ArrowRight,
   ExternalLink,
   Calendar,
+  CheckCircle2,
 } from "lucide-react";
 import type { Lesson, LessonType, Resource } from "@/types";
 import { lessonTypeIcon, lessonTypeLabel } from "@/components/learning/Curriculum";
@@ -141,8 +142,7 @@ export function ExerciseLesson({ lesson }: { lesson: Lesson }) {
 
 /** Image gallery lesson — grid of SVG images with captions. */
 export function GalleryLesson({ lesson }: { lesson: Lesson }) {
-  const images = lesson.galleryImages ?? [];
-  const captions = lesson.galleryCaptions ?? [];
+  const images = lesson.gallery ?? [];
 
   return (
     <div className="space-y-6">
@@ -155,14 +155,9 @@ export function GalleryLesson({ lesson }: { lesson: Lesson }) {
           <figure key={src} className="rounded-sm overflow-hidden border border-border bg-card">
             <ImageWithFallback
               src={src}
-              alt={captions[index] ?? `Gallery image ${index + 1}`}
+              alt={`Gallery image ${index + 1}`}
               className="aspect-[4/3] w-full object-cover"
             />
-            {captions[index] && (
-              <figcaption className="p-3 text-sm text-muted-foreground">
-                {captions[index]}
-              </figcaption>
-            )}
           </figure>
         ))}
       </div>
@@ -178,7 +173,7 @@ export function GalleryLesson({ lesson }: { lesson: Lesson }) {
 
 /** Timeline lesson — vertical timeline of events. */
 export function TimelineLesson({ lesson }: { lesson: Lesson }) {
-  const events = lesson.timelineEvents ?? [];
+  const events = lesson.timeline ?? [];
 
   return (
     <div className="space-y-6">
@@ -200,11 +195,6 @@ export function TimelineLesson({ lesson }: { lesson: Lesson }) {
                 {event.description && (
                   <p className="mt-0.5 text-sm text-muted-foreground">{event.description}</p>
                 )}
-                {event.location && (
-                  <p className="mt-1 text-xs text-muted-foreground/70">
-                    📍 {event.location}
-                  </p>
-                )}
               </div>
             </div>
           ))}
@@ -222,7 +212,7 @@ export function TimelineLesson({ lesson }: { lesson: Lesson }) {
 
 /** Resource lesson — links to resources (maps, timelines, glossaries, etc.). */
 export function ResourceLesson({ lesson }: { lesson: Lesson }) {
-  const resources = lesson.resourceIds
+  const resources = lesson.resources
     ?.map((id) => resourceService.getById(id))
     .filter((r): r is Resource => Boolean(r)) ?? [];
 
@@ -246,10 +236,10 @@ export function ResourceLesson({ lesson }: { lesson: Lesson }) {
                     <span className="px-2 py-0.5 rounded-xs border border-border bg-secondary/60">
                       {resource.type.replace("-", " ")}
                     </span>
-                    {resource.lastUpdated && (
+                    {resource.updatedAt && (
                       <>
                         <Calendar className="h-3 w-3" aria-hidden="true" />
-                        <span>{formatDate(resource.lastUpdated)}</span>
+                        <span>{formatDate(resource.updatedAt)}</span>
                       </>
                     )}
                   </div>
@@ -347,5 +337,3 @@ export function LessonMeta({ lesson, completed }: { lesson: Lesson; completed: b
     </div>
   );
 }
-
-import { CheckCircle2 } from "lucide-react";

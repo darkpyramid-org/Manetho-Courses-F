@@ -274,7 +274,6 @@ export function LessonNavigation({
   course: Course;
   lesson: Lesson;
   onPrevious: () => void;
-  onNext?: () => void;
 }) {
   const { markLessonComplete, isLessonComplete, isComplete } =
     useCourseProgress(course);

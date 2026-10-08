@@ -1,19 +1,17 @@
 import { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { LayoutList, ChevronLeft, ChevronRight, X } from "lucide-react";
+import { LayoutList, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { Curriculum, LessonHeader, LessonNavigation, LessonBody, MobileCurriculumSheet, lessonTypeLabel } from "@/components/learning/Curriculum";
 import { LessonBody as LessonBodyRenderer } from "@/components/learning/LessonBody";
 import { useCourseProgress } from "@/hooks/useCourseProgress";
 import { courseService, findLesson, lessonNeighbours, lessonNumber } from "@/services/courseService";
-import { cn } from "@/lib/utils";
 
 export default function LearnPage() {
   const { courseSlug, lessonSlug } = useParams<{ courseSlug: string; lessonSlug: string }>();
   const navigate = useNavigate();
   const course = courseService.getBySlug(courseSlug ?? "");
-  const [showCurriculum, setShowCurriculum] = useState(false);
   const [mobileCurriculumOpen, setMobileCurriculumOpen] = useState(false);
 
   if (!course) {
@@ -34,7 +32,7 @@ export default function LearnPage() {
   }
 
   const lesson = course.modules[lessonLocation.moduleIndex].lessons[lessonLocation.lessonIndex];
-  const { setCurrentLesson, isLessonComplete, markLessonComplete, percentage } = useCourseProgress(course);
+  const { setCurrentLesson, isLessonComplete, markLessonComplete } = useCourseProgress(course);
   const neighbours = lessonNeighbours(course, lessonSlug ?? "");
 
   useEffect(() => {
@@ -65,7 +63,7 @@ export default function LearnPage() {
       <LessonHeader
         course={course}
         lesson={lesson}
-        onOpenCurriculum={() => setShowCurriculum(true)}
+        onOpenCurriculum={() => setMobileCurriculumOpen(true)}
       />
 
       {/* Mobile curriculum sheet */}
@@ -97,11 +95,9 @@ export default function LearnPage() {
                 <span className="inline-flex items-center gap-1.5 rounded-sm border border-gold-500/40 bg-gold-500/10 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider text-gold-700 dark:text-gold-300">
                   {lessonTypeLabel(lesson.type)}
                 </span>
-                {lesson.order !== undefined && (
-                  <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-                    Lesson {String(lessonNumber(course, lesson.slug)).padStart(2, "0")}
-                  </span>
-                )}
+                <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                  Lesson {String(lessonNumber(course, lesson.slug)).padStart(2, "0")}
+                </span>
               </div>
               <h1 className="display text-2xl sm:text-3xl">{lesson.title}</h1>
             </div>
