@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { GraduationCap, BookOpen, Award, User, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { PageHeader } from "@/components/shared/PageHeader";
 import { Breadcrumbs } from "@/components/shared/Breadcrumbs";
@@ -60,7 +60,7 @@ export default function InstructorsPage() {
   );
 }
 
-export default function InstructorDetailPage() {
+export function InstructorDetailPage() {
   const { instructorSlug } = useParams<{ instructorSlug: string }>();
   const instructor = instructorService.getBySlug(instructorSlug ?? "");
 

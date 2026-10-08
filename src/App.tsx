@@ -12,7 +12,7 @@ import { LearnPage } from "@/pages/Learn";
 import { QuizPage } from "@/pages/Quiz";
 import { LearningPathsPage, LearningPathDetailPage } from "@/pages/LearningPaths";
 import { TopicsPage, TopicDetailPage } from "@/pages/Topics";
-import { InstructorsPage } from "@/pages/Instructors";
+import { InstructorsPage, InstructorDetailPage } from "@/pages/Instructors";
 import { ResourcesPage, ResourceDetailPage } from "@/pages/Resources";
 import { SearchPage } from "@/pages/Search";
 import { MyLearningPage } from "@/pages/MyLearning";
@@ -45,6 +45,7 @@ export function App() {
                   <Route path="/topics" element={<Suspense fallback={<LoadingFallback />}><TopicsPage /></Suspense>} />
                   <Route path="/topics/:topicSlug" element={<Suspense fallback={<LoadingFallback />}><TopicDetailPage /></Suspense>} />
                   <Route path="/instructors" element={<Suspense fallback={<LoadingFallback />}><InstructorsPage /></Suspense>} />
+                  <Route path="/instructors/:instructorSlug" element={<Suspense fallback={<LoadingFallback />}><InstructorDetailPage /></Suspense>} />
                   <Route path="/resources" element={<Suspense fallback={<LoadingFallback />}><ResourcesPage /></Suspense>} />
                   <Route path="/resources/:resourceSlug" element={<Suspense fallback={<LoadingFallback />}><ResourceDetailPage /></Suspense>} />
                   <Route path="/search" element={<Suspense fallback={<LoadingFallback />}><SearchPage /></Suspense>} />
